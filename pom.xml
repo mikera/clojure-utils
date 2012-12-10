@@ -14,5 +14,10 @@
   		<version>0.1.2</version>
   		<scope>test</scope>
   	</dependency>
+  	<dependency>
+  		<groupId>org.clojure</groupId>
+  		<artifactId>clojure</artifactId>
+  		<version>1.4.0</version>
+  	</dependency>
   </dependencies>
 </project>
