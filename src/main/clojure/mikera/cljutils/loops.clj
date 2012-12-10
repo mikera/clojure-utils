@@ -1,7 +1,8 @@
 (ns mikera.cljutils.loops)
 
 (defmacro for-loop 
-  "Runs an imperative for loop, binding sym to init, running code as long as check is true, updating sym according to change"
+  "Runs an imperative for loop, binding sym to init, running code as long as check is true, 
+  updating sym according to change"
   ([[sym init check change :as params] & code]
 	  (cond
 	    (not (vector? params)) 
