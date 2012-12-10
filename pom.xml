@@ -7,4 +7,11 @@
   	<artifactId>clojure-pom</artifactId>
   	<version>0.0.3</version>
   </parent>
+  <dependencies>
+  	<dependency>
+  		<groupId>net.mikera</groupId>
+  		<artifactId>cljunit</artifactId>
+  		<version>0.1.2</version>
+  	</dependency>
+  </dependencies>
 </project>
