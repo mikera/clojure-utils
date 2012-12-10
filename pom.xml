@@ -12,6 +12,7 @@
   		<groupId>net.mikera</groupId>
   		<artifactId>cljunit</artifactId>
   		<version>0.1.2</version>
+  		<scope>test</scope>
   	</dependency>
   </dependencies>
 </project>
