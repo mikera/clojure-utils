@@ -40,3 +40,11 @@
                     ~@body)]
       result#)
     (finally (remove-ns 'sym#))))
+
+(defmacro with-environment 
+  "Evaluates body in a temporary namespace that merges several other namespaces"
+  ([namespaces & body]
+    `(with-temp-ns
+      ~@(for [ns namespaces]
+         `(pull-all ~ns))
+      ~@body)))
