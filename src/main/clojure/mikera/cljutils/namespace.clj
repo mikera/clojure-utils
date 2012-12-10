@@ -1,6 +1,5 @@
 (ns mikera.cljutils.namespace)
 
-
 (defmacro pull 
   "Pulls one ore more symbols from another namespace"
   ([ns & vlist]
