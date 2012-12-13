@@ -6,6 +6,7 @@ import org.junit.Test;
 
 public class TestClojure {
 	@Test public void testClojureRun() {
-		assertEquals((long)2,Clojure.exec("(+ 1 1)"));
+		assertEquals((long)2,Clojure.eval("(+ 1 1)"));
+		assertEquals((long)2,Clojure.eval("(+ 1 1)"));
 	}
 }

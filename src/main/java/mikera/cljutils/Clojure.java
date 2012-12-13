@@ -35,7 +35,7 @@ public class Clojure {
 		return RT.var(nsName,varName);
 	}
 
-	public static Object exec(String string) {
+	public static Object eval(String string) {
 		return EVAL.invoke(readString(string));
 	}
 	
