@@ -1,10 +1,13 @@
 (ns mikera.cljutils.test-namespace
   (:use clojure.test)
-  (:use [mikera.cljutils namespace]))
+  (:require [mikera.cljutils.namespace :as n])
+  (:require [mikera.cljutils.dummy]))
 
-(deftest test-for-loop
-  (testing "create ns"
-    (create-ns 'namespace-test.foo)
-    (with-ns 'namespace-test.foo
-      (def a :foo))))
+(n/clone 'mikera.cljutils.dummy)
+
+(deftest test-with-ns
+  (testing "use existing ns"
+    (is (= 9 (n/with-ns 'mikera.cljutils.dummy dummy-bar))))
+  (testing "cloned within ns"
+    (is (= 9 dummy-bar))))
 

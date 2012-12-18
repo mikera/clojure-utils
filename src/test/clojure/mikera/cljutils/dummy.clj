@@ -1,3 +1,3 @@
 (ns mikera.cljutils.dummy)
 
-(def bar 9)
+(def dummy-bar 9)
