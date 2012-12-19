@@ -12,10 +12,15 @@
     (is (= 9 dummy-bar))))
 
 (deftest test-namespacing
-  (is (= "mikera.cljutils.dummy" (str (.ns (var mikera.cljutils.dummy/dummy-bar)))))
-  (is (= "mikera.cljutils.dummy" (str (.ns (ns-resolve 'mikera.cljutils.dummy 'dummy-bar)))))
-  (is (= "mikera.cljutils.import" (str (.ns (ns-resolve 'mikera.cljutils.dummy 'clone-foo)))))) 
+  (testing "objects in their original namespace"
+    (is (= "mikera.cljutils.dummy" (str (.ns (var mikera.cljutils.dummy/dummy-bar)))))
+    (is (= "mikera.cljutils.dummy" (str (.ns (ns-resolve 'mikera.cljutils.dummy 'dummy-bar))))))
+  (testing "pulled objects exist in new namespace"
+    (is (= "mikera.cljutils.dummy" (str (.ns (var mikera.cljutils.dummy/import-foo))))))
+  (testing "refered objects stay in original namespace var"
+    (is (= "mikera.cljutils.import" (str (.ns (ns-resolve 'mikera.cljutils.dummy 'clone-foo))))))) 
 
 (deftest test-clones-imports
-  (is (ns-interns *ns*) 'dummy-bar)) 
+  (is (ns-interns *ns*) 'dummy-bar)
+  (is (ns-interns 'mikera.cljutils.dummy) 'dummy-bar)) 
 

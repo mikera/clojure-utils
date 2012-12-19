@@ -13,4 +13,4 @@
   (meta #'mikera.cljutils.import/import-foo)
   (meta #'import-foo)
   (meta #'dummy-bar)  ;; gets metadata inluding docstring
-  )
+)
