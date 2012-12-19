@@ -1,5 +1,8 @@
 (ns mikera.cljutils.import) 
 
+(def clone-foo
+  "Cloneable value that stays in the import namespace")
+
 (def import-foo 
   "Docstring for import-foo in mikera.cljutils.import namespace" 10)
 
