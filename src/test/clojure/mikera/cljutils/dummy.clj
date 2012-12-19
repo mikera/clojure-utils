@@ -5,9 +5,11 @@
 (def dummy-bar 
   "dummy-bar in mikera.cljutils.dummy namespace" 9)
 
+
+(n/pull mikera.cljutils.import [import-foo])
+
 (defn test-stuff []
-  
+  (meta #'mikera.cljutils.import/import-foo)
+  (meta #'import-foo)
   (meta #'dummy-bar)  ;; gets metadata inluding docstring
   )
-
-;; (n/pull mikera.cljutils.import ['import-foo])

@@ -1,4 +1,5 @@
-(ns mikera.cljutils.namespace)
+(ns mikera.cljutils.namespace
+  (:refer-clojure :exclude [import]))
 
 ;; The use and distribution terms for this software are covered by the
 ;; Eclipse Public License 1.0
@@ -8,9 +9,86 @@
 ;; terms of this license. You must not remove this notice, or any
 ;; other, from this software.
 
+;; import macros originally from ztellman/potemkin
+
+(defmacro import-fn 
+  "Given a function in another namespace, defines a function with the same name in the
+   current namespace.  Argument lists, doc-strings, and original line-numbers are preserved."
+  [sym]
+  (let [vr (resolve sym)
+        m (meta vr)
+        nspace (:name m)
+        n (:name m)
+        arglists (:arglists m)
+        doc (:doc m)
+        protocol (:protocol m)]
+    (when-not vr
+      (throw (IllegalArgumentException. (str "Don't recognize " sym))))
+    (when (:macro m)
+      (throw (IllegalArgumentException. (str "Calling import-fn on a macro: " sym))))
+    `(do
+       (def ~(with-meta n {:protocol protocol}) (deref ~vr))
+       (alter-meta! (var ~n) assoc
+         :doc ~doc
+         :arglists ~(list 'quote arglists)
+         :file ~(:file m)
+         :line ~(:line m))
+       ~vr)))
+
+(defmacro import-macro
+  "Given a macro in another namespace, defines a macro with the same name in the
+   current namespace.  Argument lists, doc-strings, and original line-numbers are preserved."
+  [sym]
+  (let [vr (resolve sym)
+        m (meta vr)
+        n (:name m)
+        nspace (:ns m)
+        arglists (:arglists m)
+        doc (:doc m)]
+    (when-not vr
+      (throw (IllegalArgumentException. (str "Don't recognize " sym))))
+    (when-not (:macro m)
+      (throw (IllegalArgumentException. (str "Calling import-macro on a non-macro: " sym))))
+    `(do
+       (def ~n ~(resolve sym))
+       (alter-meta! (var ~n) assoc
+         :doc ~doc
+         :arglists ~(list 'quote arglists)
+         :file ~(:file m)
+         :line ~(:line m))
+       (.setMacro (var ~n))
+       ~vr)))
+
+(defmacro import-def [sym]
+  (let [vr (resolve sym)
+        m (meta vr)
+        n (:name m)
+        nspace (:ns m)
+        doc (:doc m)]
+    (when-not vr
+      (throw (IllegalArgumentException. (str "Don't recognize " sym))))
+    `(do
+       (def ~n ~(resolve sym))
+       (alter-meta! (var ~n) assoc
+         :doc ~doc
+         :file ~(:file m)
+         :line ~(:line m))
+       ~vr)))
+
+(defmacro import [sym]
+  (let [vr (resolve sym)
+        m (meta vr)]
+    (cond
+      (:macro m) `(import-macro ~sym)
+      (:arglists m) `(import-fn ~sym)
+      :default `(import-def ~sym))))
+
+;; pull macros modified from:
+;;   http://stackoverflow.com/questions/4732134
+
 (defmacro pull 
   "Pulls one ore more symbols from another namespace"
-  ([ns & vlist]
+  ([ns vlist]
     `(do ~@(for [sym vlist]
             (let [full-sym (symbol (str ns) (str sym))
                   var (find-var full-sym)
