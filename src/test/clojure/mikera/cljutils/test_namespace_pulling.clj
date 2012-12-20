@@ -6,6 +6,10 @@
 ;; should able to :use this namespace and get at them!
 
 (deftest test-imported-stuff
+  (testing "regular def"
+    (is (= 10 pulled-foo))
+    (is (= 10 import-foo))
+    (is (= 5 import-bar)))
   (testing "function"
     (is (= 0 (import-func)))
     (is (= 0 (pulled-func)))

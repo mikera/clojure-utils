@@ -71,7 +71,7 @@
     (when-not vr
       (throw (IllegalArgumentException. (str "Don't recognize " sym))))
     `(do
-       (def ~n ~(resolve sym))
+       (def ~n @~vr)
        (alter-meta! (var ~n) assoc
          :doc ~doc
          :file ~(:file m)
