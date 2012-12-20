@@ -10,8 +10,9 @@
 ;; (n/import mikera.cljutils.import [import-foo])
 
 (n/import mikera.cljutils.import/import-foo)
-(n/import mikera.cljutils.import/import-func)
-(n/import mikera.cljutils.import/import-macro)
+(n/pull mikera.cljutils.import [import-bar])
+(n/pull mikera.cljutils.import import-func)
+(n/pull mikera.cljutils.import/import-macro)
 
 (n/pull-all mikera.cljutils.pulled)
 

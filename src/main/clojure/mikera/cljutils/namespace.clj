@@ -91,6 +91,8 @@
 
 (defmacro pull 
   "Pulls one or more symbols from another namespace"
+  ([ns-qualified-sym]
+    `(pull ~(symbol (namespace ns-qualified-sym)) ~(symbol (name ns-qualified-sym))))
   ([ns vlist]
     (let [vlist (if (coll? vlist) vlist [vlist])]
       `(do ~@(for [sym vlist]

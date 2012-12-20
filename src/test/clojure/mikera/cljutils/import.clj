@@ -6,6 +6,9 @@
 (def import-foo 
   "Docstring for import-foo in mikera.cljutils.import namespace" 10)
 
+(def import-bar 
+  "Docstring for import-foo in mikera.cljutils.import namespace" 5)
+
 (defn import-func
   "Docstring for import-func in mikera.cljutils.import namespace" 
   ([]
