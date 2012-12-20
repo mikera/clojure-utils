@@ -13,6 +13,7 @@
 (n/import mikera.cljutils.import/import-func)
 (n/import mikera.cljutils.import/import-macro)
 
+(n/pull-all mikera.cljutils.pulled)
 
 (defn test-stuff []
   (meta #'mikera.cljutils.import/import-foo)

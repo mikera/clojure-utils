@@ -101,9 +101,9 @@
 
 (defmacro pull-all 
   "Pulls in all public symbols from another namespace"
-  ([ns]
-    `(do ~@(for [[sym var] (ns-publics ns)]
-             `(pull ~ns ~sym)))))
+  ([ns]  
+    (require ns) 
+    `(pull ~ns ~(for [[sym var] (ns-publics ns)] sym))))
 
 ;; nstools functions
 ;; by Conrad hinsen
