@@ -35,9 +35,16 @@
   (is (ns-interns 'mikera.cljutils.dummy) 'dummy-bar)) 
 
 (deftest test-with-ns
-  (testing "dummy environment copy"
-    (is (= 10 (n/with-ns mikera.cljutils.dummy import-foo))))) 
+  (testing "dummy ns"
+    (is (= 10 (n/with-ns mikera.cljutils.dummy import-foo))))
+  (testing "dummy ns function"
+    (is (= 0 (n/with-ns mikera.cljutils.dummy (import-func)))))) 
+
+(deftest test-with-temp-ns
+  (testing "temp env"
+    (is (= 2 (n/with-temp-ns (+ 1 1)))))) 
+
 
 (deftest test-with-environment
-  (testing "dummy ns copy"
-    (is (= 0 (n/with-ns mikera.cljutils.dummy (import-func)))))) 
+  (testing "dummy env"
+    (is (= 0 (n/with-environment [mikera.cljutils.dummy] (import-func)))))) 

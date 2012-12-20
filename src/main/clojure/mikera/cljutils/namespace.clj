@@ -173,7 +173,7 @@
   [& body]
   `(try
     (create-ns 'sym#)
-    (let [result# (with-ns 'sym#
+    (let [result# (with-ns sym#
                     (clojure.core/refer-clojure)
                     ~@body)]
       result#)
