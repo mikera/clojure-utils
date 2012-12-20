@@ -34,3 +34,10 @@
   (is (ns-interns *ns*) 'dummy-bar)
   (is (ns-interns 'mikera.cljutils.dummy) 'dummy-bar)) 
 
+(deftest test-with-ns
+  (testing "dummy environment copy"
+    (is (= 10 (n/with-ns mikera.cljutils.dummy import-foo))))) 
+
+(deftest test-with-environment
+  (testing "dummy ns copy"
+    (is (= 0 (n/with-ns mikera.cljutils.dummy (import-func)))))) 

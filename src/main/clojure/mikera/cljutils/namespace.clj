@@ -66,6 +66,7 @@
   (let [vr (resolve sym)
         m (meta vr)
         n (:name m)
+        n (if (:dynamic m) (with-meta n {:dynamic true}) n) 
         nspace (:ns m)
         doc (:doc m)]
     (when-not vr
@@ -163,7 +164,7 @@
   object or a symbol.  This makes it possible to define functions in
   namespaces other than the current one."
   [ns & body]
-  `(binding [*ns* (the-ns ~ns)]
+  `(binding [*ns* (the-ns '~ns)]
      ~@(map (fn [form] `(eval '~form)) body)))
 
 (defmacro with-temp-ns
