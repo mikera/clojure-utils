@@ -7,7 +7,12 @@
 
 (n/from 'mikera.cljutils.import 'clone-foo)
 
-(n/pull mikera.cljutils.import [import-foo])
+;; (n/import mikera.cljutils.import [import-foo])
+
+(n/import mikera.cljutils.import/import-foo)
+(n/import mikera.cljutils.import/import-func)
+(n/import mikera.cljutils.import/import-macro)
+
 
 (defn test-stuff []
   (meta #'mikera.cljutils.import/import-foo)

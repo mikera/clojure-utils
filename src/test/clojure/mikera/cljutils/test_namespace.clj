@@ -16,9 +16,19 @@
     (is (= "mikera.cljutils.dummy" (str (.ns (var mikera.cljutils.dummy/dummy-bar)))))
     (is (= "mikera.cljutils.dummy" (str (.ns (ns-resolve 'mikera.cljutils.dummy 'dummy-bar))))))
   (testing "pulled objects exist in new namespace"
-    (is (= "mikera.cljutils.dummy" (str (.ns (var mikera.cljutils.dummy/import-foo))))))
+    (is (= "mikera.cljutils.dummy" (str (.ns (var mikera.cljutils.dummy/import-foo)))))
+    (is (= "mikera.cljutils.dummy" (str (.ns (var mikera.cljutils.dummy/import-func)))))
+    (is (= "mikera.cljutils.dummy" (str (.ns (var mikera.cljutils.dummy/import-macro))))))
   (testing "refered objects stay in original namespace var"
     (is (= "mikera.cljutils.import" (str (.ns (ns-resolve 'mikera.cljutils.dummy 'clone-foo))))))) 
+
+(deftest test-imported-stuff
+  (testing "function"
+    (is (= 0 (mikera.cljutils.dummy/import-func)))
+    (is (= 1 (mikera.cljutils.dummy/import-func "foo"))))
+  (testing "macro"
+    (is (string? (mikera.cljutils.dummy/import-macro)))
+    (is (:macro (meta #'mikera.cljutils.dummy/import-macro))))) 
 
 (deftest test-clones-imports
   (is (ns-interns *ns*) 'dummy-bar)

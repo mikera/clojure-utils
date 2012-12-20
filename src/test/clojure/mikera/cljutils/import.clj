@@ -9,9 +9,9 @@
 (defn import-func
   "Docstring for import-func in mikera.cljutils.import namespace" 
   ([]
-    "import-func called with zero args")
+    0)
   ([x]
-    "import-func called with one arg"))
+    1))
 
 (defmacro import-macro
   "Docstring for import-macro in mikera.cljutils.import namespace" 
