@@ -93,11 +93,8 @@
   "Pulls one ore more symbols from another namespace"
   ([ns vlist]
     `(do ~@(for [sym vlist]
-            (let [full-sym (symbol (str ns) (str sym))
-                  var (find-var full-sym)
-                  metadata (meta var)]
-              ;;(println metadata)
-              `(def ~sym ~var))))))
+            (let [full-sym (symbol (str ns) (str sym))]
+              `(import ~full-sym))))))
 
 (defmacro pull-all 
   "Pulls in all public symbols from another namespace"
