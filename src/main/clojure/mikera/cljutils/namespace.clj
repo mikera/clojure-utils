@@ -59,7 +59,10 @@
        (.setMacro (var ~n))
        ~vr)))
 
-(defmacro import-def [sym]
+(defmacro import-def 
+  "Given a regular def'd var from another namespace, defined a new var with the
+   same name in the current namespace."
+  [sym]
   (let [vr (resolve sym)
         m (meta vr)
         n (:name m)
@@ -97,7 +100,7 @@
               `(def ~sym ~var))))))
 
 (defmacro pull-all 
-  "Pulls in all symbols from another namespace"
+  "Pulls in all public symbols from another namespace"
   ([ns]
     `(do ~@(for [[sym var] (ns-publics ns)]
              `(pull ~ns ~sym)))))
