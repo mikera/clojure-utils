@@ -186,3 +186,10 @@
       ~@(for [ns namespaces]
          `(pull-all ~ns))
       ~@body)))
+
+(defmacro with-merged-environment 
+  "Evaluates body in a temporary namespace that merges several other namespaces"
+  ([namespaces & body]
+    `(with-environment ~namespaces 
+      (pull-all ~(ns-name *ns*))
+      ~@body)))

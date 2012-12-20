@@ -44,7 +44,14 @@
   (testing "temp env"
     (is (= 2 (n/with-temp-ns (+ 1 1)))))) 
 
+(def this-foo 99)
 
 (deftest test-with-environment
   (testing "dummy env"
-    (is (= 0 (n/with-environment [mikera.cljutils.dummy] (import-func)))))) 
+    (is (= 0 (n/with-environment [mikera.cljutils.dummy] (import-func)))))
+  (testing "combined env"
+    (is (= 20 (n/with-environment [mikera.cljutils.import mikera.cljutils.pulled] 
+               (+ import-foo pulled-foo)))))
+  (testing "merged env"
+    (is (= 119 (n/with-merged-environment [mikera.cljutils.import mikera.cljutils.pulled] 
+               (+ import-foo pulled-foo this-foo)))))) 

@@ -9,6 +9,10 @@
 (def import-bar 
   "Docstring for import-foo in mikera.cljutils.import namespace" 5)
 
+(def this-foo
+  "Imported value that should get overrideen by with-environment test"
+  1000000)
+
 (defn import-func
   "Docstring for import-func in mikera.cljutils.import namespace" 
   ([]
