@@ -16,7 +16,7 @@ public class Clojure {
 	public static final Var EVAL=var("clojure.core", "eval");
 	public static final Var READ_STRING=var("clojure.core", "read-string");
 	static {
-		require("clojure.core");
+		// require("clojure.core");
 	}
 	
 	public static Object require(String nsName) {
