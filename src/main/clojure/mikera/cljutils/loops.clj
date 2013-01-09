@@ -12,8 +12,7 @@
 	    :default
 	      `(loop [~sym ~init value# nil]
 	         (if ~check
-	           (let [new-value# (do ~@code)]
-	             (recur ~change new-value#))
+	           (recur ~change (do ~@code))
 	           value#)))))
 
 (defmacro doseq-indexed 
