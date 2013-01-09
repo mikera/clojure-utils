@@ -1,6 +1,10 @@
 (ns mikera.cljutils.expression
   (:import clojure.lang.Compiler))
 
+(defmacro constant [body]
+  "Evaluates a constant expression at compile time" 
+  (eval body))
+
 (defn expression-info
  "Uses the Clojure compiler to analyze the given s-expr. Returns
  a map with keys :class and :primitive? indicating what the 
