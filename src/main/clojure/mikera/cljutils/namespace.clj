@@ -1,6 +1,9 @@
 (ns mikera.cljutils.namespace
   (:refer-clojure :exclude [import]))
 
+(set! *warn-on-reflection* true)
+(set! *unchecked-math* true)
+
 ;; The use and distribution terms for this software are covered by the
 ;; Eclipse Public License 1.0
 ;; (http://opensource.org/licenses/eclipse-1.0.php) which can be found

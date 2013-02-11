@@ -1,5 +1,8 @@
 (ns mikera.cljutils.loops)
 
+(set! *warn-on-reflection* true)
+(set! *unchecked-math* true)
+
 (defmacro for-loop 
   "Runs an imperative for loop, binding sym to init, running code as long as check is true, 
   updating sym according to change"

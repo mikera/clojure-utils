@@ -6,6 +6,9 @@
   (eval body))
 
 
+(set! *warn-on-reflection* true)
+(set! *unchecked-math* true)
+
 
 ;   Copyright (c) Chris Houser, Dec 2008. All rights reserved.
 ;   The use and distribution terms for this software are covered by the

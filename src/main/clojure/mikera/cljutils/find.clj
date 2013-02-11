@@ -1,5 +1,8 @@
 (ns mikera.cljutils.find)
 
+(set! *warn-on-reflection* true)
+(set! *unchecked-math* true)
+
 (defn find-first [pred coll]
   "Searches a collection and returns the first item for which pred is true, nil if not found.
    Like 'some', except it returns the value from the collection (rather than the result of 
