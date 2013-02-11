@@ -1,7 +1,8 @@
 (ns mikera.cljutils.error)
 
 (defmacro error
-  "Throws an error with the provided message(s)"
+  "Throws an error with the provided message(s). This is a macro in order to try and ensure the 
+   stack trace reports the error at the correct source line number."
   ([& vals]
     `(throw (mikera.cljutils.Error. (str ~@vals)))))
 
@@ -12,7 +13,8 @@
     `(error "TODO: Not yet implemented")))
 
 (defmacro try-or 
-  "Trys expressions in sequence until one produces a result that is neither false nor an exception.
+  "An exception-handling version of the 'or' macro.
+   Trys expressions in sequence until one produces a result that is neither false nor an exception.
    Useful for providing a default value in the case of errors."
   ([exp & alternatives]
      (if-let [as (seq alternatives)] 
