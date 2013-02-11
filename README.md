@@ -10,3 +10,11 @@ Of particular Interest:
  - mikera.cljutils.loops - Extra looping constructs and macros. Handy if you need them.
  
 
+### License
+
+All code I have written in clojure-utils is licensed under the LGPL v3.
+
+ - http://www.gnu.org/copyleft/lesser.html
+ 
+Exceptions apply to some specific code which has been incorporated from elsewhere under permissive licenses
+that allow this: see the source files for more information
