@@ -1,7 +1,9 @@
 (ns mikera.cljutils.find)
 
 (defn find-first [pred coll]
-  "Searches a collection and returns the first item for which pred is true, nil if not found"
+  "Searches a collection and returns the first item for which pred is true, nil if not found.
+   Like 'some', except it returns the value from the collection (rather than the result of 
+   applying the predicate to the value). This is often more useful."
   (loop [s (seq coll)] 
     (when s  
       (let [v (first s)]
@@ -10,10 +12,10 @@
           (recur (next s)))))))
 
 (defn find-position 
-  "Searches a collection and returns the index of the item's position"
-  ([coll item] 
+  "Searches a collection and returns the (long) index of the item's position."
+  (^long [coll item] 
     (find-position coll item 0))
-  ([coll item i] 
+  (^long [coll item ^long i] 
     (if (empty? coll) 
       nil
 	    (let [v (first coll)]
