@@ -27,9 +27,10 @@
  Example: (expression-info '(+ (int 5) (float 10)))
  Returns: {:class float, :primitive? true}"
  [expr]
- (let [^clojure.lang.Compiler$Expr fn-ast (Compiler/analyze clojure.lang.Compiler$C/EXPRESSION 
+ (let [^clojure.lang.Compiler$FnExpr fn-ast (Compiler/analyze clojure.lang.Compiler$C/EXPRESSION 
                 `(fn [] ~expr))
-       ^clojure.lang.Compiler$Expr expr-ast (.body (first (.methods fn-ast)))]
+       ^clojure.lang.Compiler$ObjMethod meth (first (.methods fn-ast))
+       ^clojure.lang.Compiler$Expr expr-ast (.body meth)]
    (when (.hasJavaClass expr-ast)
      {:class (.getJavaClass expr-ast)
       :primitive? (.isPrimitive (.getJavaClass expr-ast))})))
