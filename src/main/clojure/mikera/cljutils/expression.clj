@@ -29,8 +29,11 @@
  [expr]
  (let [^clojure.lang.Compiler$FnExpr fn-ast (Compiler/analyze clojure.lang.Compiler$C/EXPRESSION 
                 `(fn [] ~expr))
-       ^clojure.lang.Compiler$ObjMethod meth (first (.methods fn-ast))
-       ^clojure.lang.Compiler$Expr expr-ast (.body meth)]
+       ^clojure.lang.Compiler$FnMethod meth (first (.methods fn-ast))
+       ^clojure.lang.Compiler$BodyExpr expr-ast (.body meth)]
+   ;;(println (class fn-ast)) 
+   ;;(println (class meth)) 
+   ;;(println (class expr-ast)) 
    (when (.hasJavaClass expr-ast)
      {:class (.getJavaClass expr-ast)
       :primitive? (.isPrimitive (.getJavaClass expr-ast))})))
