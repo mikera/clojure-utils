@@ -3,6 +3,10 @@
 (set! *warn-on-reflection* true)
 (set! *unchecked-math* true)
 
+(defn indexed?
+  ([coll]
+    (instance? clojure.lang.Indexed coll))) 
+
 (defn find-first [pred coll]
   "Searches a collection and returns the first item for which pred is true, or nil if not found.
    Like 'some', except it returns the value from the collection (rather than the result of 
