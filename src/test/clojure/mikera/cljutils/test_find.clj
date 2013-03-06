@@ -13,6 +13,10 @@
     (is (== 2 (find-index number? '(:foo :bar 3 :baz 4 5 :bif))))
     (is (== -1 (find-index number? [:foo :bar :bif])))))
 
+(deftest test-find-position
+  (is (== 2 (find-position 4 [0 2 4 6 8])))
+  (is (== -1 (find-position 5 [0 2 4 6 8]))))
+
 (deftest test-indexed
   (is (indexed? [1 2 3 4]))
   (is (not (indexed? '(1 2 3 4))))) 

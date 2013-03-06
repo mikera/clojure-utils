@@ -35,13 +35,14 @@
           -1))))) 
 
 (defn find-position 
-  "Searches a collection and returns the (long) index of the item's position."
-  (^long [coll item] 
-    (find-position coll item 0))
-  (^long [coll item ^long i] 
-    (if (empty? coll) 
-      nil
-	    (let [v (first coll)]
+  "Searches a collection and returns the (long) index of the item's position.
+   Optionally starts counting from i. Returns -1 if not found"
+  (^long [item coll] 
+    (find-position item coll 0))
+  (^long [item coll ^long i] 
+    (if-let [coll (seq coll)] 
+      (let [v (first coll)]
 	      (if (= item v)
 	        i
-	        (recur (rest coll) item (inc i)))))))
+	        (recur item (rest coll) (inc i))))
+      -1)))
