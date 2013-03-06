@@ -46,3 +46,12 @@
 	        i
 	        (recur item (rest coll) (inc i))))
       -1)))
+
+(defn find-position-in-vector
+  "Searches an indexed data structure for an item and returns the index, or -1 if not found."
+  [item vector]
+  (let [c (count vector)]
+    (loop [i (int 0)]
+      (if (>= i c)
+        -1
+        (if (= item (nth vector i)) i (recur (inc i)))))))
