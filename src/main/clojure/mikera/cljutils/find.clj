@@ -23,10 +23,16 @@
   "Searches a collection and returns the index of the first item for which pred is true.
    Returns -1 if not found"
   (^long [pred coll]
-    (loop [i 0 s (seq coll)]
-      (if s
-        (if (pred (first s)) i (recur (inc i) (next s)))
-        -1)))) 
+    (if (indexed? coll)
+      (let [c (count coll)]
+        (loop [i 0]
+          (if (< i c) 
+            (if (pred (nth coll i)) i (recur (inc i)))
+            -1)))
+      (loop [i 0 s (seq coll)]
+        (if s
+          (if (pred (first s)) i (recur (inc i) (next s)))
+          -1))))) 
 
 (defn find-position 
   "Searches a collection and returns the (long) index of the item's position."
