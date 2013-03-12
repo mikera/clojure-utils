@@ -196,3 +196,14 @@
     `(with-environment ~namespaces 
       (pull-all ~(ns-name *ns*))
       ~@body)))
+
+(defmacro deferred
+   "Loads and runs a function dynamically to defer loading the namespace.
+    Usage: \"(deferred clojure.core/+ 1 2 3)\" returns 6.  There's no issue
+    calling require multiple times on an ns."
+   [fully-qualified-func & args]
+   (let [func (symbol (name fully-qualified-func))
+         space (symbol (namespace fully-qualified-func))]
+     `(do (require '~space)
+          (let [v# (ns-resolve '~space '~func)]
+            (v# ~@args)))))
