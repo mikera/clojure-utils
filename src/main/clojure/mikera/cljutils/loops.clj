@@ -28,3 +28,15 @@
              ~@code
              (recur (next vals#) (inc ~index-sym)))
        nil))))
+
+(defmacro dovec 
+  "Performs an operation for each element of an indexed vector. Binds i to the index at each element."
+  ([[sym v :as bindings] & body]
+    (when-not (vector? bindings) (error "dovec requires a binding vector"))
+    (when-not (symbol? sym) (error "dovec binding requires a symbol"))
+    `(let [v# ~v
+           c# (count v#)]
+       (loop [~'i 0]
+         (if (< ~'i c#)
+           (let [~sym (v# ~'i)] ~@body)
+           nil)))))
