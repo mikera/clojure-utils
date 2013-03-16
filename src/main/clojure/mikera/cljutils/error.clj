@@ -16,6 +16,12 @@
   ([]
     `(error "TODO: Not yet implemented")))
 
+(defmacro valid 
+  "Asserts that an expression is true, throws an error otherwise."
+  ([body & msgs]
+    `(or ~body
+       (error ~@msgs))))
+
 (defmacro try-or 
   "An exception-handling version of the 'or' macro.
    Trys expressions in sequence until one produces a result that is neither false nor an exception.

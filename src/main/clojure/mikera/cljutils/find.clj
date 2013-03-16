@@ -3,6 +3,10 @@
 (set! *warn-on-reflection* true)
 (set! *unchecked-math* true)
 
+(defn indexed?
+  ([coll]
+    (instance? clojure.lang.Indexed coll))) 
+
 (defn find-first [pred coll]
   "Searches a collection and returns the first item for which pred is true, or nil if not found.
    Like 'some', except it returns the value from the collection (rather than the result of 
@@ -19,19 +23,44 @@
   "Searches a collection and returns the index of the first item for which pred is true.
    Returns -1 if not found"
   (^long [pred coll]
-    (loop [i 0 s (seq coll)]
-      (if s
-        (if (pred (first s)) i (recur (inc i) (next s)))
-        -1)))) 
+    (if (indexed? coll)
+      (let [c (count coll)]
+        (loop [i 0]
+          (if (< i c) 
+            (if (pred (nth coll i)) i (recur (inc i)))
+            -1)))
+      (loop [i 0 s (seq coll)]
+        (if s
+          (if (pred (first s)) i (recur (inc i) (next s)))
+          -1))))) 
 
 (defn find-position 
-  "Searches a collection and returns the (long) index of the item's position."
-  (^long [coll item] 
-    (find-position coll item 0))
-  (^long [coll item ^long i] 
-    (if (empty? coll) 
-      nil
-	    (let [v (first coll)]
+  "Searches a collection and returns the (long) index of the item's position.
+   Optionally starts counting from i. Returns -1 if not found"
+  (^long [item coll] 
+    (find-position item coll 0))
+  (^long [item coll ^long i] 
+    (if-let [coll (seq coll)] 
+      (let [v (first coll)]
 	      (if (= item v)
 	        i
-	        (recur (rest coll) item (inc i)))))))
+	        (recur item (rest coll) (inc i))))
+      -1)))
+
+(defn find-position-in-vector
+  "Searches an indexed data structure for an item and returns the index, or -1 if not found."
+  [item vector]
+  (let [c (count vector)]
+    (loop [i (int 0)]
+      (if (>= i c)
+        -1
+        (if (= item (nth vector i)) i (recur (inc i)))))))
+
+(defn eager-filter 
+  "Filters a collection eagerly, returning a sequence"
+  ([pred coll]
+    (seq (reverse
+           (reduce (fn [tail v] 
+                     (if (pred v) (cons v tail) tail)) 
+                   nil 
+                   coll)))))

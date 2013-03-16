@@ -1,0 +1,23 @@
+(ns mikera.cljutils.logic)
+
+(defn xor 
+  "Returns the logical xor of a set of values, considered as booleans"
+  (^Boolean [] false)
+  (^Boolean [x] (boolean x))
+  (^Boolean [x y] (if x (not y) (boolean y)))
+  (^Boolean [x y & more]
+    (loop [p (xor x y) ss (seq more)]
+      (if ss
+        (recur (if (first ss) (not p) p) (next ss))
+        p))))
+
+(defn and* 
+  "Returns the logical and of a set of values, considered as booleans"
+  (^Boolean [] true)
+  (^Boolean [x] (boolean x))
+  (^Boolean [x y] (if x (boolean y) false))
+  (^Boolean [x y & more]
+    (loop [p (and* x y) ss (seq more)]
+      (if p
+        (if ss (recur (first ss) (next ss)) true)
+        false))))
