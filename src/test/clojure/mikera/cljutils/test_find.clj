@@ -26,4 +26,5 @@
   (is (not (indexed? '(1 2 3 4))))) 
 
 (deftest tets-eager-filter
-  (is (= [1 3] (eager-filter odd? [1 2 3 4])))) 
+  (is (= [1 3] (eager-filter odd? [1 2 3 4])))
+  (is (nil? (eager-filter odd? [2 4])))) 
