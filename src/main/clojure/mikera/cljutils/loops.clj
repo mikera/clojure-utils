@@ -1,4 +1,5 @@
-(ns mikera.cljutils.loops)
+(ns mikera.cljutils.loops
+  (:use mikera.cljutils.error))
 
 (set! *warn-on-reflection* true)
 (set! *unchecked-math* true)

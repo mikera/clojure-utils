@@ -5,7 +5,10 @@
 (deftest test-find-first
   (testing "find a number"
     (is (= 3 (find-first number? [:foo :bar 3 :baz 4 5 :bif])))
-    (is (= 3 (find-first number? '(:foo :bar 3 :baz 4 5 :bif))))))
+    (is (= 3 (find-first number? '(:foo :bar 3 :baz 4 5 :bif)))))
+  (testing "find in empty coll"
+    (is (= nil (find-first number? [])))
+    (is (= nil (find-first number? '())))))
 
 (deftest test-find-index
   (testing "find a number"
