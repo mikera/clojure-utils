@@ -1,5 +1,6 @@
 (ns mikera.cljutils.loops
-  (:use mikera.cljutils.error))
+  (:use mikera.cljutils.error)
+  (:import [mikera.cljutils FastSeq]))
 
 (set! *warn-on-reflection* true)
 (set! *unchecked-math* true)
@@ -52,3 +53,17 @@
          (if-let [res (do ~@body)]
            res
            (recur (dec tries)))))))
+
+(defmacro dotimes-results 
+  ([[sym n :as binding] & body]
+    (or (vector? binding) (error "Must have a binding vector!"))
+    (or (== 2 (count binding)) (error "Binding vector must have 2 elements!"))
+    (or (symbol? sym) (error "First binding argument must be a symbol."))
+    `(let [n# (long ~n)]
+       (loop [~sym 0 ^FastSeq fs# nil ^FastSeq hfs# nil]
+         (if (< ~sym n#)
+           (let [nfs# (if fs# hfs# (FastSeq. nil nil)) ]
+             (.set (.first nfs#) ~@body)
+             (and hfs# (.set (.next hfs#) nfs#)) 
+             (recur (unchecked-inc ~sym) (or fs# nfs#) nfs#))
+         fs#)))))
