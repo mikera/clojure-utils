@@ -13,6 +13,14 @@ public final class FastSeq implements clojure.lang.ISeq {
 	public Object first;
 	public FastSeq next;
 	
+	public FastSeq() {
+		this(null,null);
+	}
+	
+	public FastSeq(Object o) {
+		this (o,null);
+	}
+	
 	public FastSeq(Object o, FastSeq next) {
 		first=o;
 		this.next=next;
