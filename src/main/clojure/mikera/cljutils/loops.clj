@@ -55,6 +55,7 @@
            (recur (dec tries)))))))
 
 (defmacro dotimes-results 
+  "Like dotimes, but retuns a seq of the results of eachg iteration."
   ([[sym n :as binding] & body]
     (or (vector? binding) (error "Must have a binding vector!"))
     (or (== 2 (count binding)) (error "Binding vector must have 2 elements!"))
