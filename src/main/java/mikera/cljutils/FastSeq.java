@@ -11,7 +11,7 @@ import clojure.lang.RT;
  * A fast sequence class designed for quick construction of lists
  */
 
-public final class FastSeq implements clojure.lang.ISeq, clojure.lang.Sequential, Collection {
+public final class FastSeq implements clojure.lang.ISeq, clojure.lang.Sequential, Collection<Object> {
 	public Object _first;
 	public FastSeq _next;
 	public Object x;
@@ -125,7 +125,7 @@ public final class FastSeq implements clojure.lang.ISeq, clojure.lang.Sequential
 	}
 
 	@Override
-	public Iterator iterator() {
+	public Iterator<Object> iterator() {
 		return new FastSeqIterator();
 	}
 
@@ -139,6 +139,7 @@ public final class FastSeq implements clojure.lang.ISeq, clojure.lang.Sequential
 		return arr;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Object[] toArray(Object[] a) {
 		int i=0;
@@ -159,7 +160,7 @@ public final class FastSeq implements clojure.lang.ISeq, clojure.lang.Sequential
 	}
 
 	@Override
-	public boolean containsAll(Collection c) {
+	public boolean containsAll(Collection<? extends Object> c) {
 		for (Object o:c) {
 			if (!contains (o)) return false;
 		}
@@ -167,17 +168,17 @@ public final class FastSeq implements clojure.lang.ISeq, clojure.lang.Sequential
 	}
 
 	@Override
-	public boolean addAll(Collection c) {
+	public boolean addAll(Collection<? extends Object> c) {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public boolean removeAll(Collection c) {
+	public boolean removeAll(Collection<? extends Object> c) {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public boolean retainAll(Collection c) {
+	public boolean retainAll(Collection<? extends Object> c) {
 		throw new UnsupportedOperationException();
 	}
 
