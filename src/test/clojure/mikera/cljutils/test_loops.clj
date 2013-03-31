@@ -18,3 +18,8 @@
                 (swap! ic + i))
       (is (= @c 10))
       (is (= @ic 6)))))
+
+(deftest test-dotimes-results
+  (is (nil? (dotimes-results [i 0] 6)))
+  (is (= [0 1 2 3] (dotimes-results [i 4] i)))
+  (is (= [0] (dotimes-results [i 1] i))))

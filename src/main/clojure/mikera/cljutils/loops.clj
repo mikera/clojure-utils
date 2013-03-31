@@ -63,8 +63,7 @@
     `(let [n# (long ~n)]
        (loop [~sym 0 ^FastSeq fs# nil ^FastSeq hfs# nil]
          (if (< ~sym n#)
-           (let [nfs# (if fs# hfs# (FastSeq. nil nil)) ]
-             (.set (.first nfs#) ~@body)
-             (and hfs# (.set (.next hfs#) nfs#)) 
+           (let [^FastSeq nfs# (FastSeq. (do ~@body) nil)]
+             (when hfs# (set! (. hfs# ~'_next) nfs#)) 
              (recur (unchecked-inc ~sym) (or fs# nfs#) nfs#))
          fs#)))))
