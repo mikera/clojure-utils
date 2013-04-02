@@ -46,13 +46,13 @@
 (defmacro or-loop 
   "Evaluates body repeatedly up to a given number of times, until it returns a truthy value. 
    Returns nil if a truthy value is not found."
-  ([[times :as bindings] & body]
+  ([[max-times :as bindings] & body]
     (when-not (vector? bindings) (error "or-loop requires a binding vector"))
-    `(loop [tries# ~times]
+    `(loop [tries# ~max-times]
        (if (<= tries# 0) nil
-         (if-let [res (do ~@body)]
-           res
-           (recur (dec tries)))))))
+         (if-let [res# (do ~@body)]
+           res#
+           (recur (dec tries#)))))))
 
 (defmacro dotimes-results 
   "Like dotimes, but retuns a seq of the results of eachg iteration."
