@@ -12,12 +12,20 @@
    Like 'some', except it returns the value from the collection (rather than the result of 
    applying the predicate to the value). This is often more useful.
    Note that it is possible to find and return a nil value if the collection contains nils."
-  (loop [s (seq coll)] 
-    (when s  
-      (let [v (first s)]
-        (if (pred v)
-          v
-          (recur (next s)))))))
+  (if (indexed? coll)
+    (let [c (count coll)
+          ^clojure.lang.Indexed icoll coll]
+      (loop [i 0]
+        (if (< i c) 
+          (let [v (.nth icoll i)]
+            (if (pred v) v (recur (inc i))))
+          nil)))
+    (loop [s (seq coll)] 
+      (when s  
+        (let [v (first s)]
+          (if (pred v)
+            v
+            (recur (next s))))))))
 
 (defn find-index
   "Searches a collection and returns the index of the first item for which pred is true.
