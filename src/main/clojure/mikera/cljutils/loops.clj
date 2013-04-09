@@ -52,7 +52,7 @@
            nil)))))
 
 (defn eager-map
-  "Like map, but eager runs the function over the whole sequence"
+  "Like map, but eagerly runs the function over the whole sequence."
   ([f xs]
     (if-let [xs (seq xs)]
       (let [result (FastSeq. (f (first xs)))]
