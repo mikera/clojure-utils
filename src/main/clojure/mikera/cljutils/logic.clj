@@ -21,3 +21,14 @@
       (if p
         (if ss (recur (first ss) (next ss)) true)
         false))))
+
+(defn or* 
+  "Returns the logical or of a set of values, considered as booleans"
+  (^Boolean [] false)
+  (^Boolean [x] (boolean x))
+  (^Boolean [x y] (if x true (boolean y)))
+  (^Boolean [x y & more]
+    (loop [p (or* x y) ss (seq more)]
+      (if p
+        true
+        (if ss (recur (first ss) (next ss)) false)))))
