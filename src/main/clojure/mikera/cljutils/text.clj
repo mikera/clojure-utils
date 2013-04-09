@@ -5,9 +5,17 @@
   (^String [num char]
     (apply str (repeat num char))))
 
-(defn dotted-truncate 
+(defn truncate 
+  "Truncates a string to a given maximum length."
+  (^String [^String s length]
+    (let [slen (.length s)]
+      (if (<= slen length)
+        s
+        (.substring s 0 length)))))
+
+(defn truncate-dotted 
   "Truncates a string to a specified length, putting dots at the end if length is exceeded"
-  (^String [length ^String s & {:keys [num-dots]
+  (^String [^String s length & {:keys [num-dots]
                                 :or {num-dots 3}}]
     (let [num-dots (int (min num-dots length))
           slen (.length s)
@@ -15,3 +23,33 @@
       (if (< slen length)
         s
         (str (.substring s 0 ss) (repeat-char num-dots \.))))))
+
+(defn pad-right
+  "Pads a string on the right with the given char. Char defaults to space if not specified."
+  (^String [^String string min-length]
+    (pad-right string min-length \space))
+  (^String [^String string min-length char]
+    (let [slen (.length string)]
+      (if (< slen min-length )
+        (str string (repeat-char (- min-length slen) char))
+        string))))
+
+(defn pad-left
+  "Pads a string on the left with the given char. Char defaults to space if not specified."
+  (^String [^String string min-length]
+    (pad-left string min-length \space))
+  (^String [^String string min-length char]
+    (let [slen (.length string)]
+      (if (< slen min-length )
+        (str (repeat-char (- min-length slen) char) string)
+        string))))
+
+(defn pad-centre
+  "Pads a string on the both sides with the given char. Char defaults to space if not specified."
+  (^String [^String string min-length]
+    (pad-left string min-length \space))
+  (^String [^String string min-length char]
+    (let [slen (.length string)]
+      (if (< slen min-length )
+        (str (repeat-char (- min-length slen) char) string)
+        string))))

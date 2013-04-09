@@ -2,8 +2,17 @@
   (:use clojure.test)
   (:use [mikera.cljutils text]))
 
-(deftest test-dt
+(deftest test-text-padding
   (testing "dotted truncation"
-    (is (= "a..." (dotted-truncate 4 "aardvark")))
-    (is (= "aa.." (dotted-truncate 4 "aardvark" :num-dots 2)))
-    (is (= "aardvark" (dotted-truncate 40 "aardvark" :num-dots 2)))))
+    (is (= "a..." (truncate-dotted "aardvark" 4)))
+    (is (= "aa.." (truncate-dotted "aardvark" 4 :num-dots 2)))
+    (is (= "aardvark" (truncate-dotted "aardvark" 40 :num-dots 2)))
+    (is (= "" (truncate-dotted "aardvark" 0 :num-dots 2))))
+  (testing "right padding"
+    (is (= "a  " (pad-right "a" 3)))
+    (is (= "a--" (pad-right "a" 3 \-)))
+    (is (= "armadillo" (pad-right "armadillo" 3))))
+  (testing "truncate"
+    (is (= "" (truncate "hello" 0)))
+    (is (= "he" (truncate "hello" 2)))
+    (is (= "hello" (truncate "hello" 20)))))
