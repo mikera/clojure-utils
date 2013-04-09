@@ -4,7 +4,16 @@
 (set! *warn-on-reflection* true)
 (set! *unchecked-math* true)
 
-
+(defn typed-array
+  "Creates a typed Java array of a collection of objects. Uses the class
+   of the first object to determine the type of the array."
+  ([objects]
+    (let [cnt (count objects)
+          cl (.getClass ^Object (first objects))
+          ^objects arr (make-array cl cnt)]
+      (doseq-indexed [o objects i]
+        (aset arr (int i) o))
+      arr)))
 
 (defn copy-long-array 
   "Returns a copy of a long array"
