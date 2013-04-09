@@ -19,6 +19,12 @@
       (is (= @c 10))
       (is (= @ic 6)))))
 
+(deftest test-eager-map
+  (testing "eager map"
+    (is (= [1 2 3] (eager-map inc [0 1 2])))
+    (is (nil? (eager-map inc [])))
+    (is (nil? (eager-map inc nil))))) 
+
 (deftest test-dotimes-results
   (is (nil? (dotimes-results [i 0] 6)))
   (is (= [0 1 2 3] (dotimes-results [i 4] i)))

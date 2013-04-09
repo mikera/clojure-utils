@@ -51,6 +51,18 @@
            (let [~sym (v# ~'i)] ~@body)
            nil)))))
 
+(defn eager-map
+  "Like map, but eager runs the function over the whole sequence"
+  ([f xs]
+    (if-let [xs (seq xs)]
+      (let [result (FastSeq. (f (first xs)))]
+        (loop [xs xs
+               r result]
+          (if-let [nxs (next xs)]
+            (do (set! (._next r) (FastSeq. (f (first nxs))))
+              (recur nxs (._next r)))
+            result)))))) 
+
 (defmacro or-loop 
   "Evaluates body repeatedly up to a given number of times, until it returns a truthy value. 
    Returns nil if a truthy value is not found."
