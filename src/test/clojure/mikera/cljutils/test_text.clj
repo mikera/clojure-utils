@@ -12,6 +12,10 @@
     (is (= "a  " (pad-right "a" 3)))
     (is (= "a--" (pad-right "a" 3 \-)))
     (is (= "armadillo" (pad-right "armadillo" 3))))
+  (testing "left padding"
+    (is (= "  a" (pad-left "a" 3)))
+    (is (= "--a" (pad-left "a" 3 \-)))
+    (is (= "armadillo" (pad-left "armadillo" 3))))
   (testing "truncate"
     (is (= "" (truncate "hello" 0)))
     (is (= "he" (truncate "hello" 2)))
