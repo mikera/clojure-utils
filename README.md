@@ -9,6 +9,26 @@ Of particular Interest:
  - mikera.cljutils.namepace - Clojure functions for merging / managing namespaces
  - mikera.cljutils.loops - Extra looping constructs and macros. Handy if you need them.
  
+### Clojure calling example
+
+Perhaps the most useful feature in `clojure-utils` is a set of utility functions 
+designed to allow easy calling of Clojure code from Java. These are contained 
+in the `mikera.cljutils.Clojure` class. Usage example:
+
+```java
+import mikera.cljutils.Clojure;
+
+public class Demo {
+	public static void main(String [] args) {
+		String s = "(+ 1 2)";
+		System.out.println("Evaluating Clojure code: "+s);
+
+		Object result = Clojure.eval(s);
+		System.out.println("=> "+ result);
+	}
+}
+```
+
 
 ### License
 
