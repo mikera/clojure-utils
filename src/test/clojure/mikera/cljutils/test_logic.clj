@@ -10,6 +10,16 @@
     (is (not (xor)))
     (is (not (xor true false false true false false true true)))))
 
+(deftest test-nand
+  (testing "NAND"
+    (is (not (nand true true)))
+    (is (nand nil false))
+    (is (not (nand 1)))
+    (is (not (nand 1 2)))
+    (is (not (nand 1 2 3)))
+    (is (not (nand 1 2 3 4))))
+    (is (nand 1 2 nil 3 4)))
+
 (deftest test-and*
   (testing "AND"
     (is (identical? true (and* 1)))

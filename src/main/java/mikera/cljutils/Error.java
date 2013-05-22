@@ -1,5 +1,10 @@
 package mikera.cljutils;
 
+/**
+ * A custom runtime exception class
+ * @author Mike
+ *
+ */
 @SuppressWarnings("serial")
 public class Error extends RuntimeException {
 	public Error(String message) {

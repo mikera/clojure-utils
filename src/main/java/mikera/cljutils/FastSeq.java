@@ -8,7 +8,10 @@ import clojure.lang.PersistentList;
 import clojure.lang.RT;
 
 /*
- * A fast sequence class designed for quick construction of lists
+ * A fast, lightweight sequence class designed for quick construction of lists
+ * 
+ * In particular, the list is mutable so you can cut / reshape sequences. Exploit
+ * this "feature" with caution.
  */
 
 public final class FastSeq implements clojure.lang.ISeq, clojure.lang.Sequential, Collection<Object> {

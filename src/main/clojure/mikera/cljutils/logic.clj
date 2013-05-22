@@ -1,5 +1,11 @@
 (ns mikera.cljutils.logic)
 
+(defmacro nand
+  ([] false)
+  ([x] `(not ~x))
+  ([x y] `(not (and ~x ~y)))
+  ([x y & more] `(not (and ~x ~y ~@more))))
+
 (defn xor 
   "Returns the logical xor of a set of values, considered as booleans"
   (^Boolean [] false)
