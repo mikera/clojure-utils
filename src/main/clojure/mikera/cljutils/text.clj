@@ -53,3 +53,8 @@
       (if (< slen min-length )
         (str (repeat-char (- min-length slen) char) string)
         string))))
+
+(defn capitalise ^String [^String s]
+  (if (> (count s) 0)
+    (str (Character/toUpperCase (.charAt s 0)) (.substring s 1))
+    s))
