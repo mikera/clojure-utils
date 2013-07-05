@@ -20,3 +20,7 @@
     (is (= "" (truncate "hello" 0)))
     (is (= "he" (truncate "hello" 2)))
     (is (= "hello" (truncate "hello" 20)))))
+
+(deftest test-cap
+  (is (= "You" (capitalise "you"))))
+
