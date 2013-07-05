@@ -25,4 +25,6 @@
                             true)))
     (is (= nil (and-as-> false x 
                            true 
-                           nil)))))
+                           nil))))
+  (testing "Conditional"
+    (is (= 3 (and-as-> 1 x (inc x) (if (== 2 x) x nil) (inc x))))))
