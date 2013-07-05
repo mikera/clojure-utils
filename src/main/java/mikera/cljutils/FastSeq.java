@@ -11,7 +11,11 @@ import clojure.lang.RT;
  * A fast, lightweight sequence class designed for quick construction of lists
  * 
  * In particular, the list is mutable so you can cut / reshape sequences. Exploit
- * this "feature" with caution.
+ * this "feature" with caution, for obvious reasons. Clojure isn't expecting lists
+ * to be mutated.
+ * 
+ * In practice, this means that you should only ever mutate the FastSeq while 
+ * it is being constructed.
  */
 
 public final class FastSeq implements clojure.lang.ISeq, clojure.lang.Sequential, Collection<Object> {
