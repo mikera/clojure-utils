@@ -61,6 +61,6 @@
 
 (defn take-lines 
   "Takes a specified number of lines from a file, and returns a sequence of these lines as Strings"
-  ([n f]
-  (with-open [rdr (clojure.java.io/reader f)]
+  ([n file]
+  (with-open [rdr (clojure.java.io/reader file)]
     (doall (take n (line-seq rdr))))))
