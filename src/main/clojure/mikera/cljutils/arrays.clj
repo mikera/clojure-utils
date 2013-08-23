@@ -22,7 +22,7 @@
 
 (defn long-range 
   "Returns a range of longs in a long[] array"
-  ([end]
+  (^longs [end]
     (let [end (int end)
           ^longs arr (long-array end)]
       (dotimes [i end]
@@ -31,8 +31,8 @@
 
 (defn long-array-of 
   "Creates a long array with the specified values."
-  ([] (long-array 0))
-  ([a] 
+  (^longs [] (long-array 0))
+  (^longs [a] 
     (let [arr (long-array 1)]
       (aset arr 0 (long a))
       arr))

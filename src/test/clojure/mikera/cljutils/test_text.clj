@@ -1,6 +1,7 @@
 (ns mikera.cljutils.test-text
   (:use clojure.test)
-  (:use [mikera.cljutils text]))
+  (:use [mikera.cljutils text])
+  (:require [clojure.java io]))
 
 (deftest test-text-padding
   (testing "dotted truncation"
@@ -24,3 +25,5 @@
 (deftest test-cap
   (is (= "You" (capitalise "you"))))
 
+(deftest test-lines
+  (is (= ["test1"] (take-lines 1 (clojure.java.io/resource "mikera/cljutils/test.txt")))))
