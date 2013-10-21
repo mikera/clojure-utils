@@ -1,5 +1,8 @@
 (ns mikera.cljutils.text)
 
+(set! *warn-on-reflection* true)
+(set! *unchecked-math* true)
+
 (defn repeat-char
   "Repeats a character a given numbers of times and returns the concatenated String"
   (^String [num char]

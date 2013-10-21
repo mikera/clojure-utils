@@ -1,6 +1,5 @@
 (ns mikera.cljutils.error)
 
-
 (set! *warn-on-reflection* true)
 (set! *unchecked-math* true)
 

@@ -1,6 +1,5 @@
 (ns mikera.cljutils.bytes)
 
-
 (set! *warn-on-reflection* true)
 (set! *unchecked-math* true)
 
