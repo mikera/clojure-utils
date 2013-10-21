@@ -1,5 +1,7 @@
 (ns mikera.cljutils.bytes
-  (:refer-clojure :exclude [reverse]))
+  (:refer-clojure :exclude [reverse])
+  (:require [mikera.cljutils.hex :as hex])
+  (:require [clojure.string :as str]))
 
 (set! *warn-on-reflection* true)
 (set! *unchecked-math* true)
@@ -34,6 +36,10 @@
           ^bytes res (byte-array length)]
       (System/arraycopy a (int start) res (int 0) length)
       res)))
+
+(defn to-hex-string 
+  ([^bytes bs]
+    (str/join " " (map #(hex/hex-string-from-byte %) bs))))
 
 (defn unchecked-byte-array 
   "Like clojure.core/byte-array but performs unchecked casts on sequence values."

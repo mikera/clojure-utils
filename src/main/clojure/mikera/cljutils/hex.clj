@@ -23,6 +23,13 @@
   ([^long n]
     (Long/toHexString n)))
 
+(defn hex-string-from-byte 
+  "Converts an byte value to a hexadecimal string representing the unsigned value of the byte." 
+  ([b]
+    (let [hs (Long/toHexString (+ 256 (long b)))
+          n (.length hs)]
+      (.substring hs (int (- n 2))))))
+
 (defn bytes-from-hex-string [^String s]
   (let [s (str/replace s #"\s+" "")
         ^String s (str/replace s "0x" "")
