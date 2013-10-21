@@ -1,11 +1,12 @@
-(ns mikera.cljutils.bytes)
+(ns mikera.cljutils.bytes
+  (:refer-clojure :exclude [reverse]))
 
 (set! *warn-on-reflection* true)
 (set! *unchecked-math* true)
 
 (def BYTE-ARRAY-CLASS (Class/forName "[B"))
 
-(defn reverse-bytes 
+(defn reverse 
   (^bytes [^bytes bs]
     (let [n (alength bs)
           res (byte-array n)]
@@ -13,7 +14,7 @@
         (aset res i (aget bs (- n (inc i)))))
       res)))
 
-(defn join-bytes 
+(defn join 
   "Concatenates two byte arrays"
   (^bytes [^bytes a ^bytes b]
     (let [al (int (alength a))
@@ -23,6 +24,8 @@
       (System/arraycopy a (int 0) res (int 0) al)
       (System/arraycopy b (int 0) res (int al) bl)
       res)))
+
+
 
 (defn unchecked-byte-array 
   "Like clojure.core/byte-array but performs unchecked casts on sequence values."
