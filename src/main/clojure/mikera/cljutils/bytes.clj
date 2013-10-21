@@ -39,6 +39,7 @@
       res)))
 
 (defn to-hex-string 
+  "Converts a byte array to a string representation , with space as a default separator."
   ([^bytes bs]
     (str/join " " (map #(hex/hex-string-from-byte %) bs))))
 
