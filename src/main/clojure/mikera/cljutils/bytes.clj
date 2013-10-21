@@ -3,6 +3,16 @@
 (set! *warn-on-reflection* true)
 (set! *unchecked-math* true)
 
+(def BYTE-ARRAY-CLASS (Class/forName "[B"))
+
+(defn reverse-bytes 
+  (^bytes [^bytes bs]
+    (let [n (alength bs)
+          res (byte-array n)]
+      (dotimes [i n]
+        (aset res i (aget bs (- n (inc i)))))
+      res)))
+
 (defn join-bytes 
   "Concatenates two byte arrays"
   (^bytes [^bytes a ^bytes b]
