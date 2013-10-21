@@ -5,8 +5,23 @@
 (set! *unchecked-math* true)
 
 (defn hex-string 
-  "Converts an integer to a hexadecimal string." ([n]
-  (Long/toHexString n)))
+  "Converts an an integer value to a hexadecimal string representing the unsigned value integer.
+   The length of the output depends on the value of the integer." 
+  ([n]
+    (cond
+      (instance? Long n) (Long/toHexString (unchecked-long n))
+      (instance? Integer n) (java.lang.Integer/toHexString (unchecked-int n))
+      (instance? Character n) (.substring 
+                                (java.lang.Integer/toHexString 
+                                  (unchecked-int (char n)))
+                                0 4)
+      (instance? Byte n) (java.lang.Integer/toHexString (unchecked-byte n))
+      :else (Long/toHexString (unchecked-long n)))))
+
+(defn hex-string-from-long 
+  "Converts an long value to a hexadecimal string representing the unsigned value of the long." 
+  ([^long n]
+    (Long/toHexString n)))
 
 (defn bytes-from-hex-string [^String s]
   (let [s (str/replace s #"\s+" "")
