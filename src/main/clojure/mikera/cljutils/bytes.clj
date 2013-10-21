@@ -1,5 +1,6 @@
 (ns mikera.cljutils.bytes
   (:refer-clojure :exclude [reverse])
+  (:import [java.util Arrays])
   (:require [mikera.cljutils.hex :as hex])
   (:require [clojure.string :as str]))
 
@@ -53,3 +54,8 @@
       (if (sequential? init-val-or-seq) 
         (map unchecked-byte init-val-or-seq )
         init-val-or-seq))))
+
+(defn bytes=
+  "Compares two byte arrays for equality."
+  ([^bytes a ^bytes b]
+    (Arrays/equals a b)))

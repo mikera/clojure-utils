@@ -12,3 +12,9 @@
          (seq (slice (unchecked-byte-array (range 4)) 1 2))))
   (is (= (seq (unchecked-byte-array [1 2 3]))
          (seq (slice (unchecked-byte-array (range 4)) 1)))))
+
+(deftest test=
+  (is (bytes= (unchecked-byte-array (range 4))
+             (unchecked-byte-array (range 4))))
+  (is (not (bytes= (unchecked-byte-array (range 4))
+                  (unchecked-byte-array (range 5))))))
