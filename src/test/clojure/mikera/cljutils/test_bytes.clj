@@ -9,4 +9,6 @@
 
 (deftest test-slice
   (is (= (seq (unchecked-byte-array [1 2]))
-         (seq (slice (unchecked-byte-array (range 4)) 1 2)))))
+         (seq (slice (unchecked-byte-array (range 4)) 1 2))))
+  (is (= (seq (unchecked-byte-array [1 2 3]))
+         (seq (slice (unchecked-byte-array (range 4)) 1)))))
