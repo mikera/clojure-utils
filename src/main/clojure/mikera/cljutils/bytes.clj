@@ -25,7 +25,15 @@
       (System/arraycopy b (int 0) res (int al) bl)
       res)))
 
-
+(defn slice
+  "Slices a byte array with a given start and length"
+  (^bytes [a start]
+    (slice a start (- (alength ^bytes a) start)))
+  (^bytes [a start length]
+    (let [al (int (alength ^bytes a))
+          ^bytes res (byte-array length)]
+      (System/arraycopy a (int start) res (int 0) length)
+      res)))
 
 (defn unchecked-byte-array 
   "Like clojure.core/byte-array but performs unchecked casts on sequence values."
