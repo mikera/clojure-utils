@@ -1,11 +1,12 @@
 (ns mikera.cljutils.hex
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as str])
+  (:require [mikera.cljutils.text :as text]))
 
 (set! *warn-on-reflection* true)
 (set! *unchecked-math* true)
 
 (defn hex-string 
-  "Converts an an integer value to a hexadecimal string representing the unsigned value integer.
+  "Converts an an integer value to a hexadecimal string representing the unsigned value.
    The length of the output depends on the value of the integer." 
   ([n]
     (cond
@@ -16,12 +17,16 @@
                                   (unchecked-int (char n)))
                                 0 4)
       (instance? Byte n) (java.lang.Integer/toHexString (unchecked-byte n))
-      :else (Long/toHexString (unchecked-long n)))))
+      :else (Long/toHexString (unchecked-long n))))
+  ([n zero-pad-length]
+    (text/pad-left (hex-string n) zero-pad-length "0")))
 
 (defn hex-string-from-long 
   "Converts an long value to a hexadecimal string representing the unsigned value of the long." 
   ([^long n]
-    (Long/toHexString n)))
+    (Long/toHexString n))
+  ([^long n zero-pad-length]
+    (text/pad-left (hex-string-from-long n) zero-pad-length "0")))
 
 (defn hex-string-from-byte 
   "Converts an byte value to a hexadecimal string representing the unsigned value of the byte." 
