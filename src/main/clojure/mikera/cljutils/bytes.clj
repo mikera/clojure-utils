@@ -41,7 +41,9 @@
 (defn to-hex-string 
   "Converts a byte array to a string representation , with space as a default separator."
   ([^bytes bs]
-    (str/join " " (map #(hex/hex-string-from-byte %) bs))))
+    (to-hex-string bs " "))
+  ([^bytes bs separator]
+    (str/join separator (map #(hex/hex-string-from-byte %) bs))))
 
 (defn unchecked-byte-array 
   "Like clojure.core/byte-array but performs unchecked casts on sequence values."
