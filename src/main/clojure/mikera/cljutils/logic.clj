@@ -1,5 +1,8 @@
 (ns mikera.cljutils.logic)
 
+(set! *warn-on-reflection* true)
+(set! *unchecked-math* true)
+
 (defmacro nand
   ([] false)
   ([x] `(not ~x))

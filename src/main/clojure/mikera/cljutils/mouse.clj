@@ -1,6 +1,9 @@
 (ns mikera.cljutils.mouse
   (:import [java.awt MouseInfo PointerInfo Point]))
 
+(set! *warn-on-reflection* true)
+(set! *unchecked-math* true)
+
 (defn- mouse-point 
   (^Point []
     (.getLocation (MouseInfo/getPointerInfo))))

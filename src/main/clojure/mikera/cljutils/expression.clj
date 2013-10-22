@@ -1,14 +1,12 @@
 (ns mikera.cljutils.expression
   (:import clojure.lang.Compiler))
 
-(defmacro constant [body]
-  "Evaluates a constant expression at compile time" 
-  (eval body))
-
-
 (set! *warn-on-reflection* true)
 (set! *unchecked-math* true)
 
+(defmacro constant [body]
+  "Evaluates a constant expression at compile time" 
+  (eval body))
 
 ;   Copyright (c) Chris Houser, Dec 2008. All rights reserved.
 ;   The use and distribution terms for this software are covered by the
