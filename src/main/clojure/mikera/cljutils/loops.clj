@@ -54,6 +54,7 @@
 (defn eager-map
   "Like map, but eagerly runs the function over the whole sequence.
    Equivalent to (doall (map ....)) but marginally faster."
+  ;; TODO fast implementation for Indexed collections
   ([f xs]
     (if-let [xs (seq xs)]
       (let [result (FastSeq. (f (first xs)))]
