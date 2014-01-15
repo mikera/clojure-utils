@@ -35,13 +35,15 @@
           n (.length hs)]
       (.substring hs (int (- n 2))))))
 
-(defn bytes-from-hex-string [^String s]
-  (let [s (str/replace s #"\s+" "")
-        ^String s (str/replace s "0x" "")
-        cc (.length s)
-        n (quot cc 2)
-        res (byte-array n)]
-    (dotimes [i n]
-      (aset res i (byte (+ (bit-and 0xF0 (bit-shift-left (Character/getNumericValue (char (.charAt s (int (* 2 i))))) 4)) 
-                           (bit-and 0x0F (long (Character/getNumericValue (.charAt s (int (+ (* 2 i) 1))))))))))
-    res))
+(defn bytes-from-hex-string 
+  "Converts a string of hex digits into a byte array."
+  ([^String s]
+    (let [s (str/replace s #"\s+" "")
+          ^String s (str/replace s "0x" "")
+          cc (.length s)
+          n (quot cc 2)
+          res (byte-array n)]
+      (dotimes [i n]
+        (aset res i (byte (+ (bit-and 0xF0 (bit-shift-left (Character/getNumericValue (char (.charAt s (int (* 2 i))))) 4)) 
+                             (bit-and 0x0F (long (Character/getNumericValue (.charAt s (int (+ (* 2 i) 1))))))))))
+      res)))
