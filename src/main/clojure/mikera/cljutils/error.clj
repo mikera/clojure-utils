@@ -22,7 +22,10 @@
   "Throws a TODO error. This ia a useful macro as it is easy to search for in source code, while
    also throwing an error at runtime if encountered."
   ([]
-    `(error "TODO: Not yet implemented")))
+    `(TODO "Not yet implemented"))
+  ([message]
+    `(throw (java.lang.UnsupportedOperationException (str "TODO: " ~message)))))
+  
 
 (defmacro valid 
   "Asserts that an expression is true, throws an error otherwise."
