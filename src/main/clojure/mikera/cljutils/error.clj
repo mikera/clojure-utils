@@ -6,8 +6,8 @@
 (defmacro error
   "Throws an error with the provided message(s). This is a macro in order to try and ensure the 
    stack trace reports the error at the correct source line number."
-  ([& vals]
-    `(throw (mikera.cljutils.Error. (str ~@vals)))))
+  ([& messages]
+    `(throw (mikera.cljutils.Error. (str ~@messages)))))
 
 (defmacro error?
   "Returns true if executing body throws an error, false otherwise."
