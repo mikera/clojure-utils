@@ -2,6 +2,9 @@
   (:use clojure.test)
   (:use [mikera.cljutils macros]))
 
+(deftest test-as 
+  (is (= 1 (as-> 1 x x x))))
+
 (deftest test-and-as
   (testing "Basic results"
     (is (= 1 (and-as-> 1 x)))

@@ -19,12 +19,12 @@
 		<dependency>
 			<groupId>org.clojure</groupId>
 			<artifactId>clojure</artifactId>
-			<version>1.4.0</version>
+			<version>1.6.0</version>
 		</dependency>
 		<dependency>
 			<groupId>criterium</groupId>
 			<artifactId>criterium</artifactId>
-			<version>0.4.1</version>
+			<version>0.4.3</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
