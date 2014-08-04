@@ -3,11 +3,12 @@
 	<artifactId>clojure-utils</artifactId>
 	<groupId>net.mikera</groupId>
 	<version>0.6.2-SNAPSHOT</version>
+	<description>General purpose utility functions for Clojure</description>
 	
 	<parent>
 		<groupId>net.mikera</groupId>
 		<artifactId>clojure-pom</artifactId>
-		<version>0.0.4</version>
+		<version>0.1.4</version>
 	</parent>
 	
 	<dependencies>
