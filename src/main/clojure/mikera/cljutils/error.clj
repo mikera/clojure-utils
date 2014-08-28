@@ -25,7 +25,11 @@
     `(TODO "Not yet implemented"))
   ([message]
     `(throw (java.lang.UnsupportedOperationException (str "TODO: " ~message)))))
-  
+
+(defn stacktrace-str 
+  "Returns a string containing the full stacktrace of an exception"
+  ([^Throwable e] 
+    (with-out-str (.printStackTrace e (java.io.PrintWriter. ^java.io.Writer *out*)))))
 
 (defmacro valid 
   "Asserts that an expression is true, throws an error otherwise."

@@ -11,3 +11,8 @@
     (is (error? (error "foo")))
     (is (not (error? (+ 1 2))))))
 
+(deftest test-stacktrace-str
+  (let [ss (stacktrace-str (Throwable.))]
+    (is (string? ss))
+    (is (< 0 (count ss))))) 
+
