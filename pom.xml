@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>clojure-utils</artifactId>
 	<groupId>net.mikera</groupId>
-	<version>0.6.2</version>
+	<version>0.6.3-SNAPSHOT</version>
 	<description>General purpose utility functions for Clojure</description>
 
 	<licenses>
@@ -50,6 +50,6 @@
 		<connection>scm:git:git@github.com:mikera/${project.artifactId}.git</connection>
 		<url>scm:git:git@github.com:mikera/${project.artifactId}.git</url>
 		<developerConnection>scm:git:git@github.com:mikera/${project.artifactId}.git</developerConnection>
-		<tag>clojure-utils-0.6.2</tag>
+		<tag>HEAD</tag>
 	</scm>
 </project>
