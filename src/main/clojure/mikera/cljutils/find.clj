@@ -10,7 +10,8 @@
 
 (defn find-first 
    "Searches a collection and returns the first item for which pred is true, or nil if not found.
-   Like 'some', except it returns the value from the collection (rather than the result of 
+   
+   Like 'clojure.core/some', except it returns the value from the collection (rather than the result of 
    applying the predicate to the value). This is often more useful.
    
    Note that it is possible to find and return a nil value if the collection contains nils."
