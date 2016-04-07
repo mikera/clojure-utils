@@ -21,19 +21,19 @@
    Note that it is possible to find and return a nil value if the collection contains nils."
    ([pred coll]
      (find-first pred coll 0))
-   ([pred coll start]
+   ([pred coll ^long start]
      (cond 
        (indexed? coll)
          (let [c (count coll)
                ^clojure.lang.Indexed icoll coll]
-           (loop [i (long start)]
+           (loop [i start]
              (if (< i c) 
                (let [v (.nth icoll i)]
                  (if (pred v) v (recur (inc i))))
                nil)))
        (arrays/array? coll)
          (let [c (count coll)]
-           (loop [i (long start)]
+           (loop [i start]
              (if (< i c) 
                (let [v (arrays/aget* coll (int i))]
                  (if (pred v) v (recur (inc i))))
@@ -52,37 +52,46 @@
    Returns nil if not found"
   ([pred coll]
     (find-index pred coll 0))
-  ([pred coll start]
+  ([pred coll ^long start]
     (if (indexed? coll)
       (let [c (count coll)]
-        (loop [i (long start)]
+        (loop [i start]
           (if (< i c) 
             (if (pred (nth coll i)) i (recur (inc i)))
             nil)))
-      (loop [i (long start) s (drop start coll)]
+      (loop [i start s (drop start coll)]
         (when s
           (if (pred (first s)) i (recur (inc i) (next s)))))))) 
 
 (defn find-position 
   "Searches a collection and returns the (long) index of the item's position.
-   Optionally starts counting from i. 
+   An optional start position may be provided (defaults to 0)
 
    Returns nil if not found"
   ([item coll] 
     (find-position item coll 0))
-  ([item coll ^long i] 
-    (if-let [coll (seq coll)] 
-      (let [v (first coll)]
-	      (if (= item v)
-	        i
-	        (recur item (rest coll) (inc i))))
-      nil)))
-
-(defn find-position-in-vector
-  "Searches an indexed data structure for an item and returns the index, or nil if not found."
-  [item vector]
-  (let [c (count vector)]
-    (loop [i (int 0)]
-      (if (>= i c)
-        nil
-        (if (= item (nth vector i)) i (recur (inc i)))))))
+  ([item coll ^long start] 
+    (cond 
+       (indexed? coll)
+         (let [c (count coll)
+               ^clojure.lang.Indexed icoll coll]
+           (loop [i start]
+             (if (< i c) 
+               (let [v (.nth icoll i)]
+                 (if (= item v) i (recur (inc i))))
+               nil)))
+       (arrays/array? coll)
+         (let [c (count coll)]
+           (loop [i start]
+             (if (< i c) 
+               (let [v (arrays/aget* coll (int i))]
+                 (if (= item v) i (recur (inc i))))
+               nil)))
+       :else ;; default to treating as sequence
+         (loop [i start 
+                s (seq (drop start coll))] 
+           (when s  
+             (let [v (first s)]
+               (if (= item v)
+                 i
+                 (recur (inc i) (next s)))))))))
