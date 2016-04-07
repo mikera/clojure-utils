@@ -2,7 +2,7 @@
   (:use mikera.cljutils.loops))
 
 (set! *warn-on-reflection* true)
-(set! *unchecked-math* true)
+(set! *unchecked-math* :warn-on-boxed)
 
 (defn array?
   "Returns true if the argument is a Java array, false otherwise"
@@ -15,15 +15,17 @@
     (.getComponentType (.getClass ^Object a))))
 
 (defn typed-array
-  "Creates a typed Java array of a collection of objects. Uses the class
-   of the first object to determine the type of the array."
-  ([objects]
+  "Creates a typed Java array of a collection of objects. 
+
+   If class is not provided, uses the class of the first object to determine the type of the array."
+  ([^Class class objects]
     (let [cnt (count objects)
-          cl (.getClass ^Object (first objects))
-          ^objects arr (make-array cl cnt)]
+          ^objects arr (make-array class cnt)]
       (doseq-indexed [o objects i]
         (aset arr (int i) o))
-      arr)))
+      arr))
+  ([objects]
+    (typed-array (.getClass ^Object (first objects)) objects)))
 
 (defn copy-long-array 
   "Returns a copy of a long array"
