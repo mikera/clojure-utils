@@ -4,6 +4,11 @@
 (set! *warn-on-reflection* true)
 (set! *unchecked-math* true)
 
+(defn array?
+  "Returns true if the argument is a Java array, false otherwise"
+  ([a]
+    (.isArray (.getClass ^Object a))))
+
 (defn typed-array
   "Creates a typed Java array of a collection of objects. Uses the class
    of the first object to determine the type of the array."
