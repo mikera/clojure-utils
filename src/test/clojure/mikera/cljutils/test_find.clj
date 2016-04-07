@@ -22,7 +22,9 @@
 
 (deftest test-find-position
   (is (== 2 (find-position 4 [0 2 4 6 8])))
-  (is (nil? (find-position 5 [0 2 4 6 8]))))
+  (is (== 2 (find-position 4 (long-array [0 2 4 6 8]))))
+  (is (nil? (find-position 5 [0 2 4 6 8])))
+  (is (nil? (find-position 5 (object-array [0 2 4 6 8])))))
 
 (deftest test-indexed
   (is (indexed? [1 2 3 4]))
