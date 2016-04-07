@@ -13,6 +13,8 @@
 (deftest test-find-index
   (testing "find a number"
     (is (== 2 (find-index number? [:foo :bar 3 :baz 4 5 :bif])))
+    (is (== 4 (find-index number? [:foo :bar 3 :baz 4 5 :bif] 4)))
+    (is (nil? (find-index number? [:foo :bar 3 :baz 4 5 :bif] 6)))
     (is (== 2 (find-index number? '(:foo :bar 3 :baz 4 5 :bif))))
     (is (nil? (find-index number? [:foo :bar :bif])))))
 
