@@ -36,16 +36,17 @@
    
    Returns nil if not found"
   ([pred coll]
+    (find-index pred coll 0))
+  ([pred coll start]
     (if (indexed? coll)
       (let [c (count coll)]
-        (loop [i 0]
+        (loop [i start]
           (if (< i c) 
             (if (pred (nth coll i)) i (recur (inc i)))
             nil)))
-      (loop [i 0 s (seq coll)]
-        (if s
-          (if (pred (first s)) i (recur (inc i) (next s)))
-          nil))))) 
+      (loop [i start s (drop start coll)]
+        (when s
+          (if (pred (first s)) i (recur (inc i) (next s)))))))) 
 
 (defn find-position 
   "Searches a collection and returns the (long) index of the item's position.
