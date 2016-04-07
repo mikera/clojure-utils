@@ -1,7 +1,6 @@
 (ns mikera.cljutils.find
   "Namespace for utility functions that find values in collections"
-  (require [mikera.cljutils.arrays :as arrays])
-  (:import java.lang.reflect.Array))
+  (require [mikera.cljutils.arrays :as arrays]))
 
 (set! *warn-on-reflection* true)
 (set! *unchecked-math* :warn-on-boxed)
@@ -33,10 +32,10 @@
                  (if (pred v) v (recur (inc i))))
                nil)))
        (arrays/array? coll)
-         (let [c (Array/getLength coll)]
+         (let [c (count coll)]
            (loop [i (long start)]
              (if (< i c) 
-               (let [v (Array/get coll (int i))]
+               (let [v (arrays/aget* coll (int i))]
                  (if (pred v) v (recur (inc i))))
                nil)))
        :else ;; default to treating as sequence

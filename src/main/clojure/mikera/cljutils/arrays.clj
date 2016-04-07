@@ -1,5 +1,8 @@
 (ns mikera.cljutils.arrays
-  (:use mikera.cljutils.loops))
+  "Utility functions for dealing with Java arrays"
+  (:use mikera.cljutils.loops)
+  (:import java.lang.reflect.Array)
+  (:refer-clojure :exclude [aget]))
 
 (set! *warn-on-reflection* true)
 (set! *unchecked-math* :warn-on-boxed)
@@ -8,6 +11,11 @@
   "Returns true if the argument is a Java array, false otherwise"
   ([a]
     (.isArray (.getClass ^Object a))))
+
+(defn aget*
+  "Returns an element from a Java array, avoiding the usual reflection warning."
+  ([a index]
+    (Array/get a (int index))))
 
 (defn array-type
   "Returns the type of elements in a Java array. Returns nil if the argument is not an array."
