@@ -9,6 +9,11 @@
   ([a]
     (.isArray (.getClass ^Object a))))
 
+(defn array-type
+  "Returns the type of elements in a Java array. Returns nil if the argument is not an array."
+  ([a]
+    (.getComponentType (.getClass ^Object a))))
+
 (defn typed-array
   "Creates a typed Java array of a collection of objects. Uses the class
    of the first object to determine the type of the array."
