@@ -1,9 +1,10 @@
 (ns mikera.cljutils.find
   "Namespace for utility functions that find values in collections"
-  (require [mikera.cljutils.arrays :as arrays]))
+  (require [mikera.cljutils.arrays :as arrays])
+  (:import java.lang.reflect.Array))
 
 (set! *warn-on-reflection* true)
-(set! *unchecked-math* true)
+(set! *unchecked-math* :warn-on-boxed)
 
 (defn indexed?
   ([coll]
@@ -22,20 +23,29 @@
    ([pred coll]
      (find-first pred coll 0))
    ([pred coll start]
-     (if (indexed? coll)
-       (let [c (count coll)
-             ^clojure.lang.Indexed icoll coll]
-         (loop [i start]
-           (if (< i c) 
-             (let [v (.nth icoll i)]
-               (if (pred v) v (recur (inc i))))
-             nil)))
-       (loop [s (drop start coll)] 
-         (when s  
-           (let [v (first s)]
-             (if (pred v)
-               v
-               (recur (next s)))))))))
+     (cond 
+       (indexed? coll)
+         (let [c (count coll)
+               ^clojure.lang.Indexed icoll coll]
+           (loop [i (long start)]
+             (if (< i c) 
+               (let [v (.nth icoll i)]
+                 (if (pred v) v (recur (inc i))))
+               nil)))
+       (arrays/array? coll)
+         (let [c (Array/getLength coll)]
+           (loop [i (long start)]
+             (if (< i c) 
+               (let [v (Array/get coll (int i))]
+                 (if (pred v) v (recur (inc i))))
+               nil)))
+       :else ;; default to treating as sequence
+         (loop [s (drop start coll)] 
+           (when s  
+             (let [v (first s)]
+               (if (pred v)
+                 v
+                 (recur (next s)))))))))
 
 (defn find-index
   "Searches a collection and returns the index of the first item for which pred is true.
@@ -46,11 +56,11 @@
   ([pred coll start]
     (if (indexed? coll)
       (let [c (count coll)]
-        (loop [i start]
+        (loop [i (long start)]
           (if (< i c) 
             (if (pred (nth coll i)) i (recur (inc i)))
             nil)))
-      (loop [i start s (drop start coll)]
+      (loop [i (long start) s (drop start coll)]
         (when s
           (if (pred (first s)) i (recur (inc i) (next s)))))))) 
 
