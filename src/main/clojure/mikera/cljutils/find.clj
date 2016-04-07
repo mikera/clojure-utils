@@ -70,12 +70,3 @@
       (if (>= i c)
         nil
         (if (= item (nth vector i)) i (recur (inc i)))))))
-
-(defn eager-filter 
-  "Filters a collection eagerly, returning a sequence"
-  ([pred coll]
-    (seq (reverse
-           (reduce (fn [tail v] 
-                     (if (pred v) (cons v tail) tail)) 
-                   nil 
-                   coll)))))
