@@ -33,39 +33,42 @@
 
 (defn find-index
   "Searches a collection and returns the index of the first item for which pred is true.
-   Returns -1 if not found"
-  (^long [pred coll]
+   
+   Returns nil if not found"
+  ([pred coll]
     (if (indexed? coll)
       (let [c (count coll)]
         (loop [i 0]
           (if (< i c) 
             (if (pred (nth coll i)) i (recur (inc i)))
-            -1)))
+            nil)))
       (loop [i 0 s (seq coll)]
         (if s
           (if (pred (first s)) i (recur (inc i) (next s)))
-          -1))))) 
+          nil))))) 
 
 (defn find-position 
   "Searches a collection and returns the (long) index of the item's position.
-   Optionally starts counting from i. Returns -1 if not found"
-  (^long [item coll] 
+   Optionally starts counting from i. 
+
+   Returns nil if not found"
+  ([item coll] 
     (find-position item coll 0))
-  (^long [item coll ^long i] 
+  ([item coll ^long i] 
     (if-let [coll (seq coll)] 
       (let [v (first coll)]
 	      (if (= item v)
 	        i
 	        (recur item (rest coll) (inc i))))
-      -1)))
+      nil)))
 
 (defn find-position-in-vector
-  "Searches an indexed data structure for an item and returns the index, or -1 if not found."
+  "Searches an indexed data structure for an item and returns the index, or nil if not found."
   [item vector]
   (let [c (count vector)]
     (loop [i (int 0)]
       (if (>= i c)
-        -1
+        nil
         (if (= item (nth vector i)) i (recur (inc i)))))))
 
 (defn eager-filter 
