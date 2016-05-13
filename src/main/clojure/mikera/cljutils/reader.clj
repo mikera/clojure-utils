@@ -4,6 +4,6 @@
 (set! *unchecked-math* true)
 
 (defn string-reader 
-  "Returns a reader fopr the given String"
+  "Returns a reader for the given String"
   ([^String s]
     (clojure.lang.LineNumberingPushbackReader. (java.io.StringReader. s))))
