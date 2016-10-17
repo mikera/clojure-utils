@@ -1,9 +1,11 @@
 (ns mikera.cljutils.find
   "Namespace for utility functions that find values in collections"
-  (require [mikera.cljutils.arrays :as arrays]))
+  (:require [mikera.cljutils.arrays :as arrays]))
 
 (set! *warn-on-reflection* true)
 (set! *unchecked-math* :warn-on-boxed)
+
+(ns-unmap *ns* 'indexed?)
 
 (defn indexed?
   ([coll]
