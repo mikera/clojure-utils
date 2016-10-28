@@ -10,7 +10,7 @@
 (defn array?
   "Returns true if the argument is a Java array, false otherwise"
   ([a]
-    (.isArray (.getClass ^Object a))))
+    (and a (.isArray (.getClass ^Object a)))))
 
 (defn aget*
   "Returns an element from a Java array, avoiding the usual reflection warning."
