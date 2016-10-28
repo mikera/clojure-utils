@@ -19,6 +19,16 @@
       (is (= @c 10))
       (is (= @ic 6)))))
 
+(deftest test-dovec
+  (testing "Side effects"
+    (let [r (atom 0)
+          vs (atom #{})]
+      (dovec [v [:a :b :c]]
+             (swap! r + i)
+             (swap! vs conj v))
+      (is (= #{:a :b :c} @vs))
+      (is (== 3 @r)))))
+
 (deftest test-eager-map
   (testing "eager map"
     (is (= [1 2 3] (eager-map inc [0 1 2])))

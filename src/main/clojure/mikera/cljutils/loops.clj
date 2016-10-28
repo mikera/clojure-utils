@@ -48,7 +48,9 @@
            c# (count v#)]
        (loop [~'i 0]
          (if (< ~'i c#)
-           (let [~sym (v# ~'i)] ~@body)
+           (let [~sym (v# ~'i)] 
+             ~@body
+             (recur (inc ~'i)))
            nil)))))
 
 (defn eager-map
