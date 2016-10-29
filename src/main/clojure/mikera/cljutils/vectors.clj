@@ -2,7 +2,7 @@
   (:use mikera.cljutils.error))
 
 (set! *warn-on-reflection* true)
-(set! *unchecked-math* true)
+(set! *unchecked-math* :warn-on-boxed)
 
 (defn find-identical-position
   "Searches a vector for an identical item and returns the index, or -1 if not found.

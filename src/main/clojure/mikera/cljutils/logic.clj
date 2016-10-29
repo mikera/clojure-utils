@@ -1,7 +1,7 @@
 (ns mikera.cljutils.logic)
 
 (set! *warn-on-reflection* true)
-(set! *unchecked-math* true)
+(set! *unchecked-math* :warn-on-boxed)
 
 (defmacro nand
   ([] false)

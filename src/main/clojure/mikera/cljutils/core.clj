@@ -1,7 +1,7 @@
 (ns mikera.cljutils.core)
  
 (set! *warn-on-reflection* true)
-(set! *unchecked-math* true)
+(set! *unchecked-math* :warn-on-boxed)
 
 (defn apply-kw
   "Applies a function to a set of arguments, where the last argument is a map of 

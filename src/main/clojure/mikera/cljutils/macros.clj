@@ -1,7 +1,7 @@
 (ns mikera.cljutils.macros)
 
 (set! *warn-on-reflection* true)
-(set! *unchecked-math* true)
+(set! *unchecked-math* :warn-on-boxed)
 
 ; TODO: figure out why not working wiith Clojure 1.6.0?
 ;(when (and (>= (:major *clojure-version*) 1) (< (:minor *clojure-version*) 5))

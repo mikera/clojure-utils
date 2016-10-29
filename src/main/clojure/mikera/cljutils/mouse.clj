@@ -2,7 +2,7 @@
   (:import [java.awt MouseInfo PointerInfo Point]))
 
 (set! *warn-on-reflection* true)
-(set! *unchecked-math* true)
+(set! *unchecked-math* :warn-on-boxed)
 
 (defn- mouse-point 
   (^Point []

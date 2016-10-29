@@ -1,7 +1,7 @@
 (ns mikera.cljutils.text)
 
 (set! *warn-on-reflection* true)
-(set! *unchecked-math* true)
+(set! *unchecked-math* :warn-on-boxed)
 
 (defn repeat-char
   "Repeats a character a given numbers of times and returns the concatenated String"
@@ -10,7 +10,7 @@
 
 (defn truncate 
   "Truncates a string to a given maximum length."
-  (^String [^String s length]
+  (^String [^String s ^long length]
     (let [slen (.length s)]
       (if (<= slen length)
         s
@@ -20,7 +20,9 @@
   "Truncates a string to a specified length, putting dots at the end if length is exceeded"
   (^String [^String s length & {:keys [num-dots]
                                 :or {num-dots 3}}]
-    (let [num-dots (int (min num-dots length))
+    (let [length (long length)
+          num-dots (long num-dots)
+          num-dots (int (min num-dots length))
           slen (.length s)
           ss (min slen (- length num-dots))]
       (if (< slen length)
@@ -29,19 +31,20 @@
 
 (defn pad-right
   "Pads a string on the right with the given char. Char defaults to space if not specified."
-  (^String [^String string min-length]
+  (^String [^String string ^long min-length]
     (pad-right string min-length \space))
   (^String [^String string min-length char]
-    (let [slen (.length string)]
+    (let [min-length (long min-length)
+          slen (.length string)]
       (if (< slen min-length )
         (str string (repeat-char (- min-length slen) char))
         string))))
 
 (defn pad-left
   "Pads a string on the left with the given char. Char defaults to space if not specified."
-  (^String [^String string min-length]
+  (^String [^String string ^long min-length]
     (pad-left string min-length \space))
-  (^String [^String string min-length char]
+  (^String [^String string ^long min-length char]
     (let [slen (.length string)]
       (if (< slen min-length )
         (str (repeat-char (- min-length slen) char) string)
@@ -49,9 +52,9 @@
 
 (defn pad-centre
   "Pads a string on the both sides with the given char. Char defaults to space if not specified."
-  (^String [^String string min-length]
+  (^String [^String string ^long min-length]
     (pad-left string min-length \space))
-  (^String [^String string min-length char]
+  (^String [^String string ^long min-length char]
     (let [slen (.length string)]
       (if (< slen min-length )
         (str (repeat-char (- min-length slen) char) string)

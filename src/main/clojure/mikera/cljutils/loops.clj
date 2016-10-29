@@ -3,7 +3,7 @@
   (:import [mikera.cljutils FastSeq]))
 
 (set! *warn-on-reflection* true)
-(set! *unchecked-math* true)
+(set! *unchecked-math* :warn-on-boxed)
 
 (defmacro loop-results 
   "Like loop, but returns a seq of all loop results rather than the final value."

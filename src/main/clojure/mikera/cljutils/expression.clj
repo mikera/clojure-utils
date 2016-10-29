@@ -2,7 +2,7 @@
   (:import clojure.lang.Compiler))
 
 (set! *warn-on-reflection* true)
-(set! *unchecked-math* true)
+(set! *unchecked-math* :warn-on-boxed)
 
 (defmacro constant [body]
   "Evaluates a constant expression at compile time" 

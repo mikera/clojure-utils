@@ -2,7 +2,7 @@
   (:refer-clojure :exclude [import]))
 
 (set! *warn-on-reflection* true)
-(set! *unchecked-math* true)
+(set! *unchecked-math* :warn-on-boxed)
 
 ;; The use and distribution terms for this software are covered by the
 ;; Eclipse Public License 1.0

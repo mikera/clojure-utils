@@ -5,7 +5,7 @@
   (:require [clojure.string :as str]))
 
 (set! *warn-on-reflection* true)
-(set! *unchecked-math* true)
+(set! *unchecked-math* :warn-on-boxed)
 
 (def BYTE-ARRAY-CLASS (Class/forName "[B"))
 
@@ -30,9 +30,9 @@
 
 (defn slice
   "Slices a byte array with a given start and length"
-  (^bytes [a start]
+  (^bytes [^bytes a ^long start]
     (slice a start (- (alength ^bytes a) start)))
-  (^bytes [a start length]
+  (^bytes [^bytes a ^long start ^long length]
     (let [al (int (alength ^bytes a))
           ^bytes res (byte-array length)]
       (System/arraycopy a (int start) res (int 0) length)

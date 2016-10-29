@@ -1,7 +1,7 @@
 (ns mikera.cljutils.error)
 
 (set! *warn-on-reflection* true)
-(set! *unchecked-math* true)
+(set! *unchecked-math* :warn-on-boxed)
 
 (defmacro error
   "Throws an error with the provided message(s). This is a macro in order to try and ensure the 

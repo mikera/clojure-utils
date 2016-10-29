@@ -1,7 +1,7 @@
 (ns mikera.cljutils.reader)
 
 (set! *warn-on-reflection* true)
-(set! *unchecked-math* true)
+(set! *unchecked-math* :warn-on-boxed)
 
 (defn string-reader 
   "Returns a reader for the given String"

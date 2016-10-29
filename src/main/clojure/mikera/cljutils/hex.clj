@@ -3,7 +3,7 @@
   (:require [mikera.cljutils.text :as text]))
 
 (set! *warn-on-reflection* true)
-(set! *unchecked-math* true)
+(set! *unchecked-math* :warn-on-boxed)
 
 (defn hex-string 
   "Converts an an integer value to a hexadecimal string representing the unsigned value.
