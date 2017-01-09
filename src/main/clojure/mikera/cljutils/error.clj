@@ -35,7 +35,7 @@
   "Asserts that an expression is true, throws an error otherwise."
   ([body & msgs]
     `(or ~body
-       (error ~@msgs))))
+       (error "Validation error:" ~@msgs))))
 
 (defmacro try-or 
   "An exception-handling version of the 'or' macro.
