@@ -1,5 +1,5 @@
 (ns mikera.cljutils.find
-  "Namespace for utility functions that find values in collections"
+  "Namespace for utility functions that find values in collections."
   (:require [mikera.cljutils.arrays :as arrays]))
 
 (set! *warn-on-reflection* true)
@@ -100,6 +100,6 @@
 
 (defn eager-filter 
   "Filters a collection eagerly, returning a sequence.
-   Like clojure.core/filterv except the result is an ISeq (or nil)"
+   Like clojure.core/filterv except the result is an ISeq (or nil if empty)"
   ([pred coll]
     (seq (filterv pred coll))))
