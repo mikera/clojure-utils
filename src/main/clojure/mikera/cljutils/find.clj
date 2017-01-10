@@ -97,3 +97,9 @@
                (if (= item v)
                  i
                  (recur (inc i) (next s)))))))))
+
+(defn eager-filter 
+  "Filters a collection eagerly, returning a sequence.
+   Like clojure.core/filterv except the result is an ISeq (or nil)"
+  ([pred coll]
+    (seq (filterv pred coll))))
