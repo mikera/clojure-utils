@@ -8,6 +8,7 @@
 (ns-unmap *ns* 'indexed?)
 
 (defn indexed?
+  "Returns true if the collection is Indexed (i.e. an instance of clojure.lang.Indexed)"
   ([coll]
     (instance? clojure.lang.Indexed coll))) 
 

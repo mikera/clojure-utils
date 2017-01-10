@@ -1,4 +1,5 @@
 (ns mikera.cljutils.vectors
+  "Utility functions for working with Clojure persistent vectors"
   (:use mikera.cljutils.error))
 
 (set! *warn-on-reflection* true)
@@ -15,12 +16,12 @@
         (if (identical? item (.nth vector i)) i (recur (inc i)))))))
 
 (defn vector-without
-  "Cuts a specific position of a vector"
+  "Cuts a value from a specific position in a vector"
   [^clojure.lang.PersistentVector vector ^long i]
   (let [c (count vector)
         ni (inc i)]
     (cond 
-      (== c 1) (if (== i 0) [] (error "Idex of out range: " i))
+      (== c 1) (if (== i 0) [] (error "Index of out range: " i))
       (== ni c) (subvec vector 0 i)
       :else (vec (concat (subvec vector 0 i) (subvec vector ni c))))))
 

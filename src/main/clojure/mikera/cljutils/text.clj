@@ -1,4 +1,5 @@
-(ns mikera.cljutils.text)
+(ns mikera.cljutils.text
+  "Utilities for working with text strings")
 
 (set! *warn-on-reflection* true)
 (set! *unchecked-math* :warn-on-boxed)

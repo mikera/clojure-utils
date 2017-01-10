@@ -1,4 +1,5 @@
 (ns mikera.cljutils.hex
+  "Utilities for handling hexadecimal strings."
   (:require [clojure.string :as str])
   (:require [mikera.cljutils.text :as text]))
 

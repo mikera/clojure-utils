@@ -1,4 +1,5 @@
 (ns mikera.cljutils.bytes
+  "Utility functions fro working with byte arrays."
   (:refer-clojure :exclude [reverse])
   (:import [java.util Arrays])
   (:require [mikera.cljutils.hex :as hex])

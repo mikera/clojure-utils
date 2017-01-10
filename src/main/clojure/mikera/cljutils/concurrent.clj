@@ -2,6 +2,9 @@
 
 ;; Namespace for concurrency utils
 
+(set! *warn-on-reflection* true)
+(set! *unchecked-math* :warn-on-boxed)
+
 (defmacro plet [[s1 v1 & bindings] & body]
   "Equivalent of let that evaluates bindings in parallel, using a separate thread for each. 
 

@@ -1,4 +1,5 @@
 (ns mikera.cljutils.mouse
+  "Utility functions for reading the position of the mouse pointer."
   (:import [java.awt MouseInfo PointerInfo Point]))
 
 (set! *warn-on-reflection* true)

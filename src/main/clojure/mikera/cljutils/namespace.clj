@@ -1,4 +1,5 @@
 (ns mikera.cljutils.namespace
+  "Utilities for working with Clojure namespaces"
   (:refer-clojure :exclude [import]))
 
 (set! *warn-on-reflection* true)
