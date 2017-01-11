@@ -5,6 +5,7 @@
 (set! *warn-on-reflection* true)
 (set! *unchecked-math* :warn-on-boxed)
 
+;; hack to avoid name conflict with 1.9
 (ns-unmap *ns* 'indexed?)
 
 (defn indexed?
@@ -51,7 +52,8 @@
 
 (defn find-index
   "Searches a collection and returns the index of the first item for which pred is true.
-   
+   An optional start position may be provided (defaults to 0)
+
    Returns nil if not found"
   ([pred coll]
     (find-index pred coll 0))

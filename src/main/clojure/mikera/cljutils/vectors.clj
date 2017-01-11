@@ -1,6 +1,7 @@
 (ns mikera.cljutils.vectors
   "Utility functions for working with Clojure persistent vectors"
-  (:use mikera.cljutils.error))
+  (:use mikera.cljutils.error)
+  (:import [clojure.lang IPersistentVector]))
 
 (set! *warn-on-reflection* true)
 (set! *unchecked-math* :warn-on-boxed)
@@ -8,7 +9,7 @@
 (defn find-identical-position
   "Searches a vector for an identical item and returns the index, or -1 if not found.
    Mainly used to pick out the position of a thing within a specific location"
-  ^long [item ^clojure.lang.APersistentVector vector]
+  ^long [item ^IPersistentVector vector]
   (let [c (count vector)]
     (loop [i (int 0)]
       (if (>= i c)
@@ -17,7 +18,7 @@
 
 (defn vector-without
   "Cuts a value from a specific position in a vector"
-  [^clojure.lang.PersistentVector vector ^long i]
+  [^IPersistentVector vector ^long i]
   (let [c (count vector)
         ni (inc i)]
     (cond 
@@ -27,7 +28,7 @@
 
 (defn remove-from-vector
   "Removes a specific object from a vector. Throws an error if the object is not found."
-  [item ^clojure.lang.APersistentVector vector]
+  [item ^IPersistentVector vector]
   (let [i (find-identical-position item vector)]
     (when (< i 0) (error "item not found!"))
     (vector-without vector i)))
