@@ -32,7 +32,7 @@
     (with-out-str (.printStackTrace e (java.io.PrintWriter. ^java.io.Writer *out*)))))
 
 (defmacro valid 
-  "Asserts that an expression is true, throws an error otherwise."
+  "Asserts that an expression is truthy, throws an error with the provided messages otherwise."
   ([body & msgs]
     `(or ~body
        (error "Validation error:" ~@msgs))))
