@@ -6,9 +6,6 @@
 (set! *warn-on-reflection* true)
 (set! *unchecked-math* :warn-on-boxed)
 
-;; hack to avoid name conflict with 1.9
-;; (ns-unmap *ns* 'indexed?)
-
 (defn indexed?
   "Returns true if the collection is Indexed (i.e. an instance of clojure.lang.Indexed).
    This function is identical to clojure.core/indexed? from Clojure 1.9 onwards, but maintained
